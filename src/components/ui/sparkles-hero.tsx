@@ -9,7 +9,7 @@ export function SparklesHero() {
         <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
           Afk Fighters
         </h1>
-        <div className="w-[60rem] h-80 relative">
+        <div className="w-[60rem] h-[25vh] relative">
           {/* Gradients */}
           <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
           <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
@@ -21,7 +21,7 @@ export function SparklesHero() {
             background="transparent"
             minSize={0.4}
             maxSize={1}
-            particleDensity={1200}
+            particleDensity={600}
             className="w-full h-full"
             particleColor="#FFFFFF"
           />
@@ -29,7 +29,6 @@ export function SparklesHero() {
           {/* Radial Gradient to prevent sharp edges */}
           <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
         </div>
-        <h1 className="text-white">button</h1>
       </div>
     </>
   );

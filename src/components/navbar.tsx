@@ -5,8 +5,12 @@ import { Button } from "@/components/ui/button";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
+import { headers } from "next/headers";
 
 export default function Navbar() {
+  const currentUrl = headers().get("next-url");
+
+  console.log("Current URL", currentUrl);
   return (
     <div className="flex  w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
