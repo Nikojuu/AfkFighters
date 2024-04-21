@@ -67,10 +67,21 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "border-spin": {
+          "100%": { transform: "rotate(-360deg)" },
+        },
+        "bg-animation": {
+          "0%": { backgroundPosition: "left" },
+          "50%": { backgroundPosition: "right" },
+
+          "100%": { backgroundPosition: "left" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "border-spin": "border-spin 7s linear infinite",
+        "bg-animation": "bg-animation 4s infinite ",
       },
     },
   },

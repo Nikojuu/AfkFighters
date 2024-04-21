@@ -1,12 +1,5 @@
 import Image from "next/image";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "./ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 
 const FighterCard = ({ name }: { name: string }) => {
   return (

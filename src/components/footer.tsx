@@ -5,7 +5,7 @@ import { Separator } from "./ui/separator";
 
 const Footer = () => {
   const pathname = usePathname();
-  console.log(pathname);
+
   const currentYear = new Date().getFullYear();
 
   return pathname === "/" ? null : (
