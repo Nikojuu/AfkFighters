@@ -1,4 +1,4 @@
-import FighterCard from "@/components/fighter-card";
+import FighterCard from "@/components/fighter-info-card";
 
 const page = () => {
   const array = [

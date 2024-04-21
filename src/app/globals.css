@@ -78,3 +78,35 @@
 h1 {
   @apply text-4xl font-bold text-center text-primary;
 }
+
+@layer utilities {
+  /* Act as a border */
+  .combat-card-wrapper {
+    background-image: inherit;
+    @apply relative overflow-hidden rounded-2xl;
+  }
+
+  /* Gradient */
+  .combat-card-wrapper::before {
+    background: conic-gradient(
+      rgba(244, 114, 182, 0.6) 0deg,
+      rgb(255, 0, 157) 20deg,
+      transparent 60deg
+    );
+
+    @apply absolute left-[-25%] top-[-25%] h-[150%] w-[150%] animate-border-spin content-[''];
+  }
+
+  /* Body */
+  .combat-card-content {
+    background-image: linear-gradient(to bottom, #000, #3788c8, #000);
+    @apply absolute left-[2px] top-[2px] h-[calc(100%-4px)] w-[calc(100%-4px)]
+      rounded-2xl;
+  }
+
+  .combat-container {
+    @apply animate-bg-animation;
+    background-image: linear-gradient(90deg, #00014f, #78097bc4, #1f1040);
+    background-size: 300%;
+  }
+}

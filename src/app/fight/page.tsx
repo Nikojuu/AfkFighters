@@ -1,5 +1,11 @@
+import FightBoard from "@/components/fight-board";
+
 const page = () => {
-  return <div>hi</div>;
+  return (
+    <>
+      <FightBoard />
+    </>
+  );
 };
 
 export default page;
