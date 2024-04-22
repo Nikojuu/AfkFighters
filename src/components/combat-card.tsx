@@ -9,7 +9,7 @@ interface CombatCardProps {
 
 const CombatCard = ({ fighterData }: CombatCardProps) => {
   return (
-    <div className="combat-card-wrapper h-[30rem] w-96 ">
+    <div className="combat-card-wrapper h-[30rem] w-96 z-30">
       <div className="combat-card-content overflow-hidden p-4 gap-2 flex flex-col items-center justify-center text-xs">
         <div className="relative bg-white rounded-2xl w-full h-full flex-nowrap ">
           <Image
