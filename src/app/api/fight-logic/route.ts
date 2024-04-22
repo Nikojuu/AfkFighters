@@ -51,11 +51,11 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
         opponent = temp;
       }
 
-      // Determine the winner
+      // Determine name of the winner
       if (fighter1.hitpoints <= 0) {
-        return `${fighter2.name} wins!`;
+        return `${fighter2.name} `;
       } else {
-        return `${fighter1.name} wins!`;
+        return `${fighter1.name}`;
       }
     };
 

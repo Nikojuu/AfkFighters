@@ -9,7 +9,7 @@ interface CombatCardProps {
 
 const CombatCard = ({ fighterData }: CombatCardProps) => {
   return (
-    <div className="combat-card-wrapper h-[30rem] w-96 z-30">
+    <div className="combat-card-wrapper box-shadow h-[30rem] w-96 z-30">
       <div className="combat-card-content overflow-hidden p-4 gap-2 flex flex-col items-center justify-center text-xs">
         <div className="relative bg-white rounded-2xl w-full h-full flex-nowrap ">
           <Image
@@ -30,7 +30,7 @@ const CombatCard = ({ fighterData }: CombatCardProps) => {
           </Avatar>
         </div>
 
-        <div className="w-full bg-emerald-950 h-40 rounded-b-lg p-2 ">
+        <div className="w-full bg-[#E18900] h-40 rounded-b-lg rounded-t-sm p-2 border-t-4 border-pink-600">
           <div className="flex justify-between items-center ">
             <p className="font-bold">Health: {fighterData.hitpoints} ❤️</p>
             <p className="font-bold">Defense: {fighterData.defence}🛡️</p>

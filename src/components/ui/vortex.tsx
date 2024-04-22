@@ -234,6 +234,7 @@ export const Vortex = (props: VortexProps) => {
         resize(canvas, ctx);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   return (
