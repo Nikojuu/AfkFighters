@@ -1,5 +1,4 @@
 import FighterCard from "@/components/fighter-info-card";
-import { MultiStepLoaderDemo } from "@/components/active-fight-state";
 
 const page = () => {
   const array = [
