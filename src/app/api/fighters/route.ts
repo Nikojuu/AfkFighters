@@ -1,7 +1,9 @@
 import fighters from "@/database/fighters.json";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  console.log(searchParams);
   try {
     const randomFighter1 =
       fighters.fighters[Math.floor(Math.random() * fighters.fighters.length)];
