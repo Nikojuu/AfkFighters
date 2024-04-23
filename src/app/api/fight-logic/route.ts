@@ -3,7 +3,7 @@ import statistics from "@/database/statistics.json";
 import fighers from "@/database/fighters.json";
 
 import type { Fighter, elemental } from "@/components/fight-board";
-import { writeFile, writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 
 export const PUT = async (req: NextRequest, res: NextResponse) => {
   try {

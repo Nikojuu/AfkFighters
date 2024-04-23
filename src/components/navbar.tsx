@@ -32,7 +32,7 @@ export default function Navbar() {
               Fight
             </Link>
             <Link
-              href="/all-fighers"
+              href="/fighters"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               All fighters

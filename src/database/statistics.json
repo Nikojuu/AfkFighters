@@ -1,6 +1,41 @@
 {
-  "total-fights": 8,
+  "total-fights": 15,
   "recent-fights": [
+    {
+      "fighter1": "elephant",
+      "fighter2": "tiger",
+      "winner": "tiger "
+    },
+    {
+      "fighter1": "crocodile",
+      "fighter2": "panda",
+      "winner": "panda "
+    },
+    {
+      "fighter1": "sheep",
+      "fighter2": "otter",
+      "winner": "sheep"
+    },
+    {
+      "fighter1": "frog",
+      "fighter2": "otter",
+      "winner": "otter "
+    },
+    {
+      "fighter1": "flamingo",
+      "fighter2": "pig",
+      "winner": "pig "
+    },
+    {
+      "fighter1": "elephant",
+      "fighter2": "seagul",
+      "winner": "seagul "
+    },
+    {
+      "fighter1": "flamingo",
+      "fighter2": "crocodile",
+      "winner": "crocodile "
+    },
     {
       "fighter1": "pig",
       "fighter2": "reindeer",
