@@ -1,0 +1,25 @@
+{
+  "total-fights": 8,
+  "recent-fights": [
+    {
+      "fighter1": "pig",
+      "fighter2": "reindeer",
+      "winner": "reindeer "
+    },
+    {
+      "fighter1": "Alpacka",
+      "fighter2": "sloth",
+      "winner": "sloth "
+    },
+    {
+      "fighter1": "penguin",
+      "fighter2": "shark",
+      "winner": "shark "
+    },
+    {
+      "fighter1": "alpacka",
+      "fighter2": "cat",
+      "winner": "cat"
+    }
+  ]
+}

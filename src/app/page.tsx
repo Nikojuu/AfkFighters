@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { SparklesHero } from "@/components/ui/sparkles-hero";
 import Link from "next/link";
@@ -14,7 +13,6 @@ export default function Home() {
         <Button asChild variant={"outline"}>
           <Link href="/dashboard">Dashboard</Link>
         </Button>
-        <Footer />
       </div>
     </main>
   );

@@ -9,3 +9,9 @@ git push origin <branch_name>
 # Push to GitLab
 
 git push gitlab <branch_name>
+
+# killing spree indicator /fight
+
+# korttien väliin elementti win/ elemental
+
+# kuva taustalle korkeemmaksi kortteja

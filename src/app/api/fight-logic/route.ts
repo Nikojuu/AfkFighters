@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import statistics from "@/database/statistics.json";
+import fighers from "@/database/fighters.json";
 
-import { Fighter, elemental } from "@/components/fight-board";
+import type { Fighter, elemental } from "@/components/fight-board";
+import { writeFile, writeFileSync } from "fs";
 
 export const PUT = async (req: NextRequest, res: NextResponse) => {
   try {
@@ -61,9 +64,31 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
 
     // return the result of the fight
     const result = initiateFight(fighter1, fighter2, elemental);
+    //update the statistics in database
+    updateStats(fighter1, fighter2, result);
 
     return NextResponse.json(result);
   } catch (error) {
     console.log(error);
+  }
+};
+
+const updateStats = (fighter1: Fighter, fighter2: Fighter, winner: string) => {
+  const statsFilePath = "./src/database/statistics.json";
+  try {
+    // Update the statistics
+    statistics["total-fights"] += 1;
+    statistics["recent-fights"].unshift({
+      fighter1: fighter1.name,
+      fighter2: fighter2.name,
+      winner,
+    });
+
+    writeFileSync(statsFilePath, JSON.stringify(statistics, null, 2));
+
+    return statistics;
+  } catch (error) {
+    console.log(error);
+    throw new Error("An error occurred while updating statistics.");
   }
 };

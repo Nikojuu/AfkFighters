@@ -1,6 +1,17 @@
 import FighterCard from "@/components/fighter-info-card";
+import { getAllFighters } from "@/services/services";
+import { Fighter } from "@/components/fight-board";
+import ClientTest from "@/components/client-test";
 
-const page = () => {
+export interface FightersArray {
+  fighters: Fighter[];
+}
+
+const AllFighers = async () => {
+  const res = await getAllFighters();
+
+  const allFighters = res.fighters;
+
   const array = [
     { id: 1, name: "Fighter 1" },
     { id: 2, name: "Fighter 2" },
@@ -12,11 +23,12 @@ const page = () => {
   return (
     <>
       <h1 className="my-8"> All Fighters </h1>
+      <ClientTest data={res} />
       <div className="container mx-auto">
         <ul className="flex flex-wrap gap-6 w-full justify-evenly">
-          {array.map((item) => (
-            <li key={item.id} className="w-80">
-              <FighterCard name={item.name} />
+          {allFighters.map((fighter: Fighter) => (
+            <li key={fighter.name} className="w-80 ">
+              <FighterCard fighter={fighter} />
             </li>
           ))}
         </ul>
@@ -25,4 +37,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AllFighers;

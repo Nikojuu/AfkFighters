@@ -53,7 +53,7 @@ const FightBoard = () => {
       setTimeout(() => {
         setWinner(result);
         setFightActive(false);
-      }, 4000);
+      }, 4);
     } catch (error) {
       console.log(error);
     }
@@ -62,10 +62,10 @@ const FightBoard = () => {
   return (
     <>
       <div className=" overflow-hidden top-12 -z-1  h-full absolute w-full ">
-        <Vortex className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full z-0"></Vortex>
+        <Vortex className="flex items-center flex-col justify-center  py-4 w-full h-full z-0"></Vortex>
       </div>
 
-      <div className="relative  flex items-center justify-center gap-[30rem]  mt-60 mb-24 ">
+      <div className="relative  flex items-center justify-center sm:gap-20 md:gap-32 lg:gap-[20rem]  md:mt-20 mt-60  ">
         {player1 && player2 ? (
           <>
             <CombatCard fighterData={player1} />
@@ -75,7 +75,7 @@ const FightBoard = () => {
           <StartScreen />
         )}
 
-        <div className=" h-[40rem] w-[40rem] absolute z-10 ">
+        <div className=" h-[30rem] w-[40rem] absolute z-10 ">
           {elemental && (
             <>
               <h3 className="w-full bg-black border border-pink-600 text-white absolute z-50 text-center rounded-t-2xl py-4">
@@ -105,7 +105,7 @@ const FightBoard = () => {
         </div>
       </div>
 
-      <div className=" container flex justify-center mx-auto ">
+      <div className=" container flex justify-center mx-auto mt-12">
         {!fightActive && (
           <Button className="z-[1000]" onClick={handleClick}>
             Generate Fight

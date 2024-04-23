@@ -35,3 +35,16 @@ export const fightLogic = async (
     console.log(error);
   }
 };
+
+export const getAllFighters = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/all-fighters`, {
+      cache: "no-store",
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

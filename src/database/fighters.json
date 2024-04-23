@@ -2,7 +2,7 @@
   "fighters": [
     {
       "name": "Alpacka",
-      "description": "A fierce lion warrior with a mane of fire.",
+      "description": "Alpacka, the fierce chibi lion warrior, fights relentlessly to defend its allies and territory. Its mane blazes like fire, a symbol of its fiery determination. Despite its small size, Alpacka's courage knows no bounds, inspiring others to face challenges head-on. In battle, it unleashes ferocity unmatched, proving that size means nothing in the face of unyielding resolve.",
       "attack": 90,
       "hitpoints": 120,
       "weakness": "nature",
