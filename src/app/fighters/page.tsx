@@ -2,7 +2,7 @@ import { Fighter } from "@/components/fight-board";
 import FighterCard from "@/components/fighter-info-card";
 import { getAllFighters } from "@/services/services";
 import Link from "next/link";
-import * as fs from "node:fs/promises";
+
 export interface FightersArray {
   fighters: Fighter[];
 }
@@ -10,17 +10,6 @@ export interface FightersArray {
 const FighersPage = async () => {
   // this wasnt possible to fetch data using CRUD methods from local database from page component
 
-  // const getAllFighters = async () => {
-  //   try {
-  //     const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-  //     const fightersFile = await fs.readFile(fightersFilePath, "utf8");
-  //     const data = JSON.parse(fightersFile);
-  //     return data.fighters;
-  //   } catch (error) {
-  //     console.error("Error reading fighters file:", error);
-  //     return [];
-  //   }
-  // };
   const allFighters = await getAllFighters();
 
   return (
