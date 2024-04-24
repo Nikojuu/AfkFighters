@@ -1,5 +1,7 @@
+"use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { Fighter, elemental } from "../components/fight-board";
+import * as fs from "node:fs/promises";
 
 export const fetchRandomFighters = async () => {
   try {
@@ -47,3 +49,9 @@ export const fightLogic = async (
 //     console.log(error);
 //   }
 // };
+export const getAllFighters = async () => {
+  const fightersFilePath = process.cwd() + "/src/database/fighters.json";
+  const fightersFile = await fs.readFile(fightersFilePath, "utf8");
+  const data = JSON.parse(fightersFile);
+  return data.fighters;
+};

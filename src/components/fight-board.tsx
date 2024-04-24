@@ -10,6 +10,7 @@ import { ActiveFightState } from "./active-fight-state";
 
 export interface Fighter {
   name: string;
+  slug: string;
   description: string;
   attack: number;
   hitpoints: number;

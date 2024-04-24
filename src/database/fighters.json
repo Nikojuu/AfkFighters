@@ -2,6 +2,7 @@
   "fighters": [
     {
       "name": "Alpacka",
+      "slug": "alpacka",
       "description": "Alpacka, the fierce chibi lion warrior, fights relentlessly to defend its allies and territory. Its mane blazes like fire, a symbol of its fiery determination. Despite its small size, Alpacka's courage knows no bounds, inspiring others to face challenges head-on. In battle, it unleashes ferocity unmatched, proving that size means nothing in the face of unyielding resolve.",
       "attack": 90,
       "hitpoints": 120,
@@ -13,6 +14,7 @@
     },
     {
       "name": "Blowfish",
+      "slug": "blowfish",
       "description": "An agile tiger with lightning-fast strikes.",
       "attack": 85,
       "hitpoints": 100,
@@ -24,6 +26,7 @@
     },
     {
       "name": "cat",
+      "slug": "cat",
       "description": "A cunning snow leopard with icy claws.",
       "attack": 80,
       "hitpoints": 110,
@@ -35,6 +38,7 @@
     },
     {
       "name": "crab",
+      "slug": "crab",
       "description": "A fierce lion warrior with a mane of fire.",
       "attack": 75,
       "hitpoints": 90,
@@ -46,6 +50,7 @@
     },
     {
       "name": "crocodile",
+      "slug": "crocodile",
       "description": "Croko is a crocodile with a bite that can crush bones.",
       "attack": 95,
       "hitpoints": 130,
@@ -57,6 +62,7 @@
     },
     {
       "name": "dog",
+      "slug": "dog",
       "description": "dog is a dog with a bite that can crush bones.",
       "attack": 70,
       "hitpoints": 80,
@@ -68,6 +74,7 @@
     },
     {
       "name": "duck",
+      "slug": "duck",
       "description": "duck is a duck with a bite that can crush bones.",
       "attack": 65,
       "hitpoints": 70,
@@ -79,6 +86,7 @@
     },
     {
       "name": "elephant",
+      "slug": "elephant",
       "description": "elephant is a elephant with a bite that can crush bones.",
       "attack": 100,
       "hitpoints": 140,
@@ -90,6 +98,7 @@
     },
     {
       "name": "flamingo",
+      "slug": "flamingo",
       "description": "flamingo is monster with a bite that can crush bones.",
       "attack": 60,
       "hitpoints": 60,
@@ -101,6 +110,7 @@
     },
     {
       "name": "fox",
+      "slug": "fox",
       "description": "fox is a sneaky fox with a bite that can crush bones.",
       "attack": 55,
       "hitpoints": 50,
@@ -112,6 +122,7 @@
     },
     {
       "name": "frog",
+      "slug": "frog",
       "description": "frog is a frog with a bite that can crush bones.",
       "attack": 50,
       "hitpoints": 40,
@@ -123,6 +134,7 @@
     },
     {
       "name": "hamster",
+      "slug": "hamster",
       "description": "hamster is a hamster with a bite that can crush bones.",
       "attack": 105,
       "hitpoints": 150,
@@ -134,6 +146,7 @@
     },
     {
       "name": "hedgedog",
+      "slug": "hedgedog",
       "description": "hedgedog is a hedgedog with a bite that can crush bones.",
       "attack": 110,
       "hitpoints": 160,
@@ -145,6 +158,7 @@
     },
     {
       "name": "otter",
+      "slug": "otter",
       "description": "otter is a otter with a bite that can crush bones.",
       "attack": 115,
       "hitpoints": 170,
@@ -156,6 +170,7 @@
     },
     {
       "name": "panda",
+      "slug": "panda",
       "description": "panda, is a panda, with a bite that can crush bones.",
       "attack": 120,
       "hitpoints": 180,
@@ -166,18 +181,8 @@
       "defence": 60
     },
     {
-      "name": "penguin",
-      "description": "penguin is a penguin with a bite that can crush bones.",
-      "attack": 125,
-      "hitpoints": 190,
-      "weakness": "ice",
-      "imgSrc": "/penguin.jpg",
-      "winStreak": 22,
-      "totalWins": 55,
-      "defence": 65
-    },
-    {
       "name": "pig",
+      "slug": "pig",
       "description": "pig is a pig with a bite that can crush bones.",
       "attack": 130,
       "hitpoints": 200,
@@ -189,6 +194,7 @@
     },
     {
       "name": "rabbit",
+      "slug": "rabbit",
       "description": "rabbit is a rabbit with a bite that can crush bones.",
       "attack": 135,
       "hitpoints": 210,
@@ -200,6 +206,7 @@
     },
     {
       "name": "reindeer",
+      "slug": "reindeer",
       "description": "reindeer is a reindeer with a bite that can crush bones.",
       "attack": 140,
       "hitpoints": 220,
@@ -211,6 +218,7 @@
     },
     {
       "name": "seagul",
+      "slug": "seagul",
       "description": "seagul is a seagul with a bite that can crush bones.",
       "attack": 145,
       "hitpoints": 230,
@@ -222,6 +230,7 @@
     },
     {
       "name": "shark",
+      "slug": "shark",
       "description": "shark is a shark with a bite that can crush bones.",
       "attack": 150,
       "hitpoints": 240,
@@ -233,6 +242,7 @@
     },
     {
       "name": "sheep",
+      "slug": "sheep",
       "description": "sheep is a sheep with a bite that can crush bones.",
       "attack": 155,
       "hitpoints": 250,
@@ -244,6 +254,7 @@
     },
     {
       "name": "sloth",
+      "slug": "sloth",
       "description": "sloth is a sloth with a bite that can crush bones.",
       "attack": 160,
       "hitpoints": 260,
@@ -255,6 +266,7 @@
     },
     {
       "name": "snail",
+      "slug": "snail",
       "description": "snail is a snail with a bite that can crush bones.",
       "attack": 165,
       "hitpoints": 270,
@@ -266,6 +278,7 @@
     },
     {
       "name": "squirrel",
+      "slug": "squirrel",
       "description": "squirrel is a squirrel with a bite that can crush bones.",
       "attack": 170,
       "hitpoints": 280,
@@ -277,6 +290,7 @@
     },
     {
       "name": "tiger",
+      "slug": "tiger",
       "description": "tiger is a tiger with a bite that can crush bones.",
       "attack": 175,
       "hitpoints": 290,
