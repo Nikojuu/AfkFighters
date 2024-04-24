@@ -1,5 +1,3 @@
-import fs from "fs";
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { Fighter, elemental } from "../components/fight-board";
 
@@ -49,15 +47,3 @@ export const fightLogic = async (
 //     console.log(error);
 //   }
 // };
-
-export const getAllFighters = async () => {
-  try {
-    const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-    const fightersFile = fs.readFileSync(fightersFilePath, "utf8");
-    const data = JSON.parse(fightersFile);
-    return data.fighters;
-  } catch (error) {
-    console.error("Error reading fighters file:", error);
-    return [];
-  }
-};
