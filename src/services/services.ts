@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import fs from "fs";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { Fighter, elemental } from "../components/fight-board";
@@ -53,7 +53,7 @@ export const fightLogic = async (
 export const getAllFighters = async () => {
   try {
     const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-    const fightersFile = await fs.readFile(fightersFilePath, "utf8");
+    const fightersFile = fs.readFileSync(fightersFilePath, "utf8");
     const data = JSON.parse(fightersFile);
     return data.fighters;
   } catch (error) {
