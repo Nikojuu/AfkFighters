@@ -13,7 +13,7 @@ const CombatCard = ({ fighterData }: CombatCardProps) => {
       <div className="combat-card-content overflow-hidden p-4 gap-2 flex flex-col items-center justify-center text-xs">
         <div className="relative bg-white rounded-2xl w-full h-full flex-nowrap ">
           <Image
-            src={fighterData.imgSrc}
+            src={fighterData.imgsrc}
             alt=""
             fill
             className="object-contain rounded-2xl"

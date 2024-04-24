@@ -15,7 +15,7 @@ export interface Fighter {
   attack: number;
   hitpoints: number;
   weakness: string;
-  imgSrc: string;
+  imgsrc: string;
   winStreak: number;
   totalWins: number;
   defence: number;

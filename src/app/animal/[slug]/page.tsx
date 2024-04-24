@@ -14,11 +14,6 @@ const SingleAnimalPage = async ({ params }: { params: { slug: string } }) => {
   const character = await getFighter(params.slug);
 
   console.log(character);
-  return (
-    <div>
-      
-
-    </div>
-  );
+  return <div></div>;
 };
 export default SingleAnimalPage;

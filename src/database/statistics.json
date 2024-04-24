@@ -1,6 +1,16 @@
 {
-  "total-fights": 15,
+  "total-fights": 17,
   "recent-fights": [
+    {
+      "fighter1": "sloth",
+      "fighter2": "snail",
+      "winner": "snail "
+    },
+    {
+      "fighter1": "elephant",
+      "fighter2": "crocodile",
+      "winner": "elephant"
+    },
     {
       "fighter1": "elephant",
       "fighter2": "tiger",
