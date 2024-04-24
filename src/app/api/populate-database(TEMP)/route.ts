@@ -14,7 +14,7 @@ async function insertData() {
   const jsonData = await fs.readFile("src/database/fighters.json", "utf8");
 
   const allFighters = await JSON.parse(jsonData);
-  console.log(allFighters);
+
   try {
     for (const fighter of allFighters.fighters) {
       // Construct SQL query to insert each fighter into the database
