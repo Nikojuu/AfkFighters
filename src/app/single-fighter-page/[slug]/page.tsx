@@ -1,6 +1,8 @@
 import { Fighter } from "@/components/fight-board";
 import { getAllFighters, getFighter } from "@/services/services";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const allFighters = await getAllFighters();
 
