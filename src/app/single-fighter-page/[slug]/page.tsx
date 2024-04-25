@@ -14,8 +14,8 @@ import { getAllFighters, getFighter } from "@/services/services";
 const SingleFighterPage = async ({ params }: { params: { slug: string } }) => {
   // fetch database
 
-  // const character = await getFighter({ slug: params.slug });
+  const character = await getFighter({ slug: params.slug });
 
-  return <div>hi </div>;
+  return <div>hi {character.name}</div>;
 };
 export default SingleFighterPage;
