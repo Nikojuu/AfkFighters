@@ -38,6 +38,7 @@ export const fightLogic = async (
 };
 
 export const getAllFighters = async (): Promise<Fighter[]> => {
+  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/all-fighters`);
 

@@ -8,8 +8,6 @@ export interface FightersArray {
 }
 export const dynamic = "force-dynamic";
 const FighersPage = async () => {
-  // this wasnt possible to fetch data using CRUD methods from local database from page component
-
   const allFighters = await getAllFighters();
 
   return (
