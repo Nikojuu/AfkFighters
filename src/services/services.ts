@@ -1,7 +1,6 @@
 "use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { Fighter, elemental } from "../components/fight-board";
-import * as fs from "node:fs/promises";
 
 export const fetchRandomFighters = async () => {
   try {
@@ -23,7 +22,7 @@ export const fightLogic = async (
 ) => {
   try {
     const response = await fetch(`${BASE_URL}/api/fight-logic`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -38,15 +37,41 @@ export const fightLogic = async (
   }
 };
 
-export const getAllFighters = async () => {
-  "use server";
+export const getAllFighters = async (): Promise<Fighter[]> => {
   try {
     const response = await fetch(`${BASE_URL}/api/all-fighters`);
-    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch all fighters");
+    }
+
+    const data: Fighter[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getAllFighters:", error);
+    throw error;
+  }
+};
+
+export const getFighter = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<Fighter> => {
+  "use server";
+  try {
+    const response = await fetch(`${BASE_URL}/api/single-fighter/${slug}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch fighter");
+    }
+
+    const data: Fighter = await response.json();
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error("Error in getFighter:", error);
+    throw error;
   }
 };
 
@@ -58,14 +83,14 @@ export const getAllFighters = async () => {
 //   return data.fighters;
 // };
 
-export const getFighter = async (slug: string) => {
-  const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-  const fightersFile = await fs.readFile(fightersFilePath, "utf8");
+// export const getFighter = async (slug: string) => {
+//   const fightersFilePath = process.cwd() + "/src/database/fighters.json";
+//   const fightersFile = await fs.readFile(fightersFilePath, "utf8");
 
-  const data = JSON.parse(fightersFile);
-  const fighter = data.fighters.find(
-    (fighter: Fighter) => fighter.slug === slug
-  );
+//   const data = JSON.parse(fightersFile);
+//   const fighter = data.fighters.find(
+//     (fighter: Fighter) => fighter.slug === slug
+//   );
 
-  return fighter;
-};
+//   return fighter;
+// };

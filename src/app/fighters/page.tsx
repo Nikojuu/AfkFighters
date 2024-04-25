@@ -20,7 +20,7 @@ const FighersPage = async () => {
         <ul className="flex flex-wrap gap-6 w-full justify-evenly">
           {allFighters.map((fighter: Fighter) => (
             <li key={fighter.name} className="w-80 ">
-              <Link href={`/animal/${fighter.slug}`}>
+              <Link href={`/single-fighter-page/${fighter.slug}`}>
                 <FighterCard fighter={fighter} />
               </Link>
             </li>
