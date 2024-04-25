@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import * as fs from "node:fs/promises";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   await insertData();
 
   return NextResponse.json("worked", { status: 200 });
@@ -19,8 +19,10 @@ async function insertData() {
     for (const fighter of allFighters.fighters) {
       // Construct SQL query to insert each fighter into the database
       await sql`
-        INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence)
-        VALUES (${fighter.name}, ${fighter.slug}, ${fighter.description}, ${fighter.attack}, ${fighter.hitpoints}, ${fighter.weakness}, ${fighter.imgSrc}, ${fighter.winStreak}, ${fighter.totalWins}, ${fighter.defence});
+      INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence)
+      VALUES (${fighter.name}, ${fighter.slug}, ${fighter.description}, ${fighter.attack}, ${fighter.hitpoints}, ${fighter.weakness}, ${fighter.imgSrc}, ${fighter.winStreak}, ${fighter.totalWins}, ${fighter.defence})
+      ON CONFLICT (Slug) DO NOTHING;
+      
       `;
     }
     console.log("Data inserted successfully.");
