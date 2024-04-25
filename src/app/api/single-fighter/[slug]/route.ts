@@ -1,7 +1,10 @@
 import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { slug: string } }) {
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: { slug: string } }
+) {
   try {
     const slug = params.slug;
 
