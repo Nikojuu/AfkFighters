@@ -54,7 +54,7 @@ const FightBoard = () => {
       setTimeout(() => {
         setWinner(result);
         setFightActive(false);
-      }, 4);
+      }, 40);
     } catch (error) {
       console.log(error);
     }
@@ -66,35 +66,41 @@ const FightBoard = () => {
         <Vortex className="flex items-center flex-col justify-center  py-4 w-full h-full z-0"></Vortex>
       </div>
 
-      <div className="relative  flex items-center justify-center sm:gap-20 md:gap-32 lg:gap-[20rem]  md:mt-20 mt-60  ">
+      <main className="relative flex-col md:flex-row flex items-center justify-center  h-[80vh] md:h-[70vh]  md:mt-20 mt-10 container mx-auto ">
         {player1 && player2 ? (
           <>
             <CombatCard fighterData={player1} />
+            <div className="z-50 flex flex-col justify-between place-items-center h-1/2  sm:h-full mx-5 lg:mx-12 ">
+              {elemental && (
+                <>
+                  <h3 className=" bg-transparent border-y rounded-t-md mx-1 border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
+                    The mighty {elemental} Elemental has chosen to interference
+                    with the fight
+                  </h3>
+                  <div className="relative z-50 h-full w-full">
+                    <Image
+                      src={`/${elemental}.jpg`}
+                      alt=""
+                      fill
+                      className="object-cover "
+                    />
+                  </div>
+                </>
+              )}
+
+              <h2 className="text-xs sm:text-base  bg-black text-white border-y border-pink-600 rounded-b-md w-full  z-50 text-center">
+                Winner is {winner}
+              </h2>
+            </div>
             <CombatCard fighterData={player2} />
           </>
         ) : (
           <StartScreen />
         )}
 
-        <div className=" h-[30rem] w-[40rem] absolute z-10 ">
+        <div className=" h-[30rem] w-[40rem] absolute z-[100] ">
           {elemental && (
             <>
-              <h3 className="w-full bg-black border border-pink-600 text-white absolute z-50 text-center rounded-t-2xl py-4">
-                The mighty {elemental} Elemental has chosen to interference with
-                the fight
-              </h3>
-
-              <Image
-                src={`/${elemental}.jpg`}
-                alt=""
-                fill
-                className="object-cover rounded-2xl box-shadow"
-              />
-              {winner && (
-                <h2 className="rounded-b-2xl py-4 bg-black text-white absolute border border-pink-600 w-full text-center bottom-0">
-                  Winner is {winner}
-                </h2>
-              )}
               <ActiveFightState
                 player1Name={player1?.name}
                 player2Name={player2?.name}
@@ -104,7 +110,7 @@ const FightBoard = () => {
           )}
           <div className="w-full flex justify-center relative"></div>
         </div>
-      </div>
+      </main>
 
       <div className=" container flex justify-center mx-auto mt-12">
         {!fightActive && (
