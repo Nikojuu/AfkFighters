@@ -10,7 +10,8 @@
       "imgSrc": "/alpacka.jpg",
       "winStreak": 5,
       "totalWins": 15,
-      "defence": 25
+      "defence": 25,
+      "lore": "animallore"
     },
     {
       "name": "Blowfish",
@@ -22,7 +23,8 @@
       "imgSrc": "/blowfish.jpg",
       "winStreak": 8,
       "totalWins": 20,
-      "defence": 33
+      "defence": 33,
+      "lore": "animallore"
     },
     {
       "name": "cat",
@@ -34,7 +36,8 @@
       "imgSrc": "/cat.jpg",
       "winStreak": 6,
       "totalWins": 18,
-      "defence": 28
+      "defence": 28,
+      "lore": "animallore"
     },
     {
       "name": "crab",
@@ -46,7 +49,8 @@
       "imgSrc": "/dog.jpg",
       "winStreak": 4,
       "totalWins": 12,
-      "defence": 20
+      "defence": 20,
+      "lore": "animallore"
     },
     {
       "name": "crocodile",
@@ -58,7 +62,8 @@
       "imgSrc": "/crocodile.jpg",
       "winStreak": 10,
       "totalWins": 25,
-      "defence": 35
+      "defence": 35,
+      "lore": "animallore"
     },
     {
       "name": "dog",
@@ -70,7 +75,8 @@
       "imgSrc": "/dog.jpg",
       "winStreak": 3,
       "totalWins": 10,
-      "defence": 15
+      "defence": 15,
+      "lore": "animallore"
     },
     {
       "name": "duck",
@@ -82,7 +88,8 @@
       "imgSrc": "/duck.jpg",
       "winStreak": 2,
       "totalWins": 8,
-      "defence": 10
+      "defence": 10,
+      "lore": "animallore"
     },
     {
       "name": "elephant",
@@ -94,7 +101,8 @@
       "imgSrc": "/elephant.jpg",
       "winStreak": 12,
       "totalWins": 30,
-      "defence": 40
+      "defence": 40,
+      "lore": "animallore"
     },
     {
       "name": "flamingo",
@@ -109,6 +117,7 @@
       "defence": 5
     },
     {
+      "lore": "animallore",
       "name": "fox",
       "slug": "fox",
       "description": "fox is a sneaky fox with a bite that can crush bones.",
@@ -121,6 +130,7 @@
       "defence": 0
     },
     {
+      "lore": "animallore",
       "name": "frog",
       "slug": "frog",
       "description": "frog is a frog with a bite that can crush bones.",
@@ -133,6 +143,7 @@
       "defence": 0
     },
     {
+      "lore": "animallore",
       "name": "hamster",
       "slug": "hamster",
       "description": "hamster is a hamster with a bite that can crush bones.",
@@ -154,7 +165,8 @@
       "imgSrc": "/hedgedog.jpg",
       "winStreak": 16,
       "totalWins": 40,
-      "defence": 50
+      "defence": 50,
+      "lore": "animallore"
     },
     {
       "name": "otter",
@@ -166,7 +178,8 @@
       "imgSrc": "/otter.jpg",
       "winStreak": 18,
       "totalWins": 45,
-      "defence": 55
+      "defence": 55,
+      "lore": "animallore"
     },
     {
       "name": "panda",
@@ -178,7 +191,8 @@
       "imgSrc": "/panda.jpg",
       "winStreak": 20,
       "totalWins": 50,
-      "defence": 60
+      "defence": 60,
+      "lore": "animallore"
     },
     {
       "name": "pig",
@@ -190,7 +204,8 @@
       "imgSrc": "/pig.jpg",
       "winStreak": 24,
       "totalWins": 60,
-      "defence": 70
+      "defence": 70,
+      "lore": "animallore"
     },
     {
       "name": "rabbit",
@@ -202,7 +217,8 @@
       "imgSrc": "/rabbit.jpg",
       "winStreak": 26,
       "totalWins": 65,
-      "defence": 75
+      "defence": 75,
+      "lore": "animallore"
     },
     {
       "name": "reindeer",
@@ -214,7 +230,8 @@
       "imgSrc": "/reindeer.jpg",
       "winStreak": 28,
       "totalWins": 70,
-      "defence": 80
+      "defence": 80,
+      "lore": "animallore"
     },
     {
       "name": "seagul",
@@ -226,7 +243,8 @@
       "imgSrc": "/seagul.jpg",
       "winStreak": 30,
       "totalWins": 75,
-      "defence": 85
+      "defence": 85,
+      "lore": "animallore"
     },
     {
       "name": "shark",
@@ -238,7 +256,8 @@
       "imgSrc": "/shark.jpg",
       "winStreak": 32,
       "totalWins": 80,
-      "defence": 90
+      "defence": 90,
+      "lore": "animallore"
     },
     {
       "name": "sheep",
@@ -250,7 +269,8 @@
       "imgSrc": "/sheep.jpg",
       "winStreak": 34,
       "totalWins": 85,
-      "defence": 95
+      "defence": 95,
+      "lore": "animallore"
     },
     {
       "name": "sloth",
@@ -262,7 +282,8 @@
       "imgSrc": "/sloth.jpg",
       "winStreak": 36,
       "totalWins": 90,
-      "defence": 100
+      "defence": 10,
+      "lore": "animallore"
     },
     {
       "name": "snail",
@@ -274,7 +295,8 @@
       "imgSrc": "/snail.jpg",
       "winStreak": 38,
       "totalWins": 95,
-      "defence": 105
+      "defence": 10,
+      "lore": "animallore"
     },
     {
       "name": "squirrel",
@@ -286,7 +308,8 @@
       "imgSrc": "/squirrel.jpg",
       "winStreak": 40,
       "totalWins": 100,
-      "defence": 110
+      "defence": 11,
+      "lore": "animallore"
     },
     {
       "name": "tiger",
@@ -298,7 +321,8 @@
       "imgSrc": "/tiger.jpg",
       "winStreak": 42,
       "totalWins": 105,
-      "defence": 115
+      "defence": 11,
+      "lore": "animallore"
     }
   ]
 }

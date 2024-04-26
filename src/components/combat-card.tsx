@@ -39,7 +39,7 @@ const CombatCard = ({ fighterData }: CombatCardProps) => {
             </div>
           </div>
           <p className="md:py-1 py-4 text-xs lg:text-sm md: max-h-[72%] -mt-8 md:mt-8 overflow-hidden">
-            <span className="block font-bold ">Lore</span>{" "}
+            <span className="block font-bold ">Description</span>{" "}
             {fighterData.description}
           </p>
         </div>
