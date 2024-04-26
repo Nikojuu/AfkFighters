@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import statistics from "@/database/statistics.json";
-import fighers from "@/database/fighters.json";
+import { sql } from "@vercel/postgres";
 
 import type { Fighter, elemental } from "@/components/fight-board";
-import { writeFileSync } from "fs";
 
-export const PUT = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
     const { fighter1, fighter2, elemental } = await req.json();
 
@@ -73,20 +71,21 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
   }
 };
 
-const updateStats = (fighter1: Fighter, fighter2: Fighter, winner: string) => {
-  const statsFilePath = "./src/database/statistics.json";
+const updateStats = async (
+  fighter1: Fighter,
+  fighter2: Fighter,
+  winner: string
+) => {
+  const fightDate = new Date().toISOString();
+
   try {
-    // Update the statistics
-    statistics["total-fights"] += 1;
-    statistics["recent-fights"].unshift({
-      fighter1: fighter1.name,
-      fighter2: fighter2.name,
-      winner,
-    });
+    // Insert the fight data into the database
+    await sql`INSERT INTO recentfights (fighter1, fighter2, winner, fight_date) VALUES (${fighter1.name}, ${fighter2.name}, ${winner}, ${fightDate})`;
 
-    writeFileSync(statsFilePath, JSON.stringify(statistics, null, 2));
+    // Increment the total fights count in the database
+    await sql`UPDATE statistics SET total_fights = total_fights + 1`;
 
-    return statistics;
+    return { success: true };
   } catch (error) {
     console.log(error);
     throw new Error("An error occurred while updating statistics.");
