@@ -15,7 +15,7 @@ const FighterCard = ({ fighter }: FighterCardProps) => {
       <CardContent className="relative aspect-square overflow-hidden">
         <Image
           alt=""
-          src={fighter.imgSrc}
+          src={fighter.imgsrc}
           fill
           className="hover:scale-110 transition-all object-cover"
         />

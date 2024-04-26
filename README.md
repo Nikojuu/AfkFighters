@@ -15,3 +15,4 @@ git push gitlab <branch_name>
 # korttien väliin elementti win/ elemental
 
 # kuva taustalle korkeemmaksi kortteja
+# add date for statistics
