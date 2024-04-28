@@ -71,12 +71,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black text-foreground;
+    font-family: var(--font-audiowide);
   }
 }
 
 h1 {
-  @apply text-4xl font-bold text-center text-primary;
+  @apply bg-gradient-to-r from-[#e600ff] via-blue-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent  sm:text-5xl pb-4;
+
+  font-family: var(--font-audiowide);
+}
+h2 {
+  text-shadow: #e600ff 0 0 10px;
+  text-transform: uppercase;
 }
 
 @layer utilities {
@@ -117,5 +124,8 @@ h1 {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(1px);
     border-radius: 1rem;
+  }
+  h2 {
+    font-family: var(--font-jura);
   }
 }

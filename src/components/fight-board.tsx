@@ -70,7 +70,10 @@ const FightBoard = () => {
         {player1 && player2 ? (
           <>
             <CombatCard fighterData={player1} />
-            <div className="z-50 flex flex-col justify-between place-items-center h-1/2  sm:h-full mx-5 lg:mx-12 lg:min-w-[25rem]">
+            <div
+              className="z-50 flex flex-col justify-between place-items-center h-1/2 
+              sm:h-full mx-5 lg:mx-12 lg:min-w-[25rem]"
+            >
               {elemental && (
                 <>
                   <h3 className=" bg-transparent border-y rounded-t-md mx-1 border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
@@ -97,8 +100,8 @@ const FightBoard = () => {
         ) : (
           <StartScreen />
         )}
-
-        <div className=" h-[30rem] w-[40rem] absolute z-[100] ">
+        {/* remake this component entirely belwo */}
+        <div className="  absolute z-[100] ">
           {elemental && (
             <>
               <ActiveFightState

@@ -1,5 +1,6 @@
 "use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { sql } from "@vercel/postgres";
 import { Fighter, elemental } from "../components/fight-board";
 
 export const fetchRandomFighters = async () => {
@@ -76,22 +77,27 @@ export const getFighter = async ({
   }
 };
 
-// move to database service if time
-// export const getAllFighters = async () => {
-//   const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-//   const fightersFile = await fs.readFile(fightersFilePath, "utf8");
-//   const data = JSON.parse(fightersFile);
-//   return data.fighters;
-// };
+export const getDashboardData = async () => {
+  const recentFights = await sql`
+  SELECT fighter, COUNT(*) as fight_count
+  FROM (
+      SELECT fighter1 as fighter FROM recentfights
+      UNION ALL
+      SELECT fighter2 as fighter FROM recentfights
+  ) AS all_fighters
+  GROUP BY fighter
+  ORDER BY fight_count DESC
+  LIMIT 5;
+  `;
 
-// export const getFighter = async (slug: string) => {
-//   const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-//   const fightersFile = await fs.readFile(fightersFilePath, "utf8");
+  const allFights = await sql`
+  SELECT * FROM recentfights
 
-//   const data = JSON.parse(fightersFile);
-//   const fighter = data.fighters.find(
-//     (fighter: Fighter) => fighter.slug === slug
-//   );
-
-//   return fighter;
-// };
+  `;
+  // add another querys to this promise
+  const data = await Promise.all([recentFights.rows, allFights.rows]);
+  return {
+    recentFights: data[0], // Access the first element for recentFights
+    allFights: data[1], // Access the second element for allFights
+  };
+};

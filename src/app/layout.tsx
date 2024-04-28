@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import { audiowide, unkempt } from "./fonts/fonts";
 
 export const metadata: Metadata = {
   title: "AFK Fighers",
@@ -19,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${audiowide.variable} ${unkempt.variable} selection:text-black selection:bg-pink-600`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

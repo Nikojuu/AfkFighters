@@ -1,6 +1,5 @@
-import { Fighter } from "@/components/fight-board";
 import { Vortex } from "@/components/ui/vortex";
-import { getAllFighters, getFighter } from "@/services/services";
+import { getFighter } from "@/services/services";
 import { sql } from "@vercel/postgres";
 import { QueryResultRow } from "@vercel/postgres";
 import Image from "next/image";
@@ -21,7 +20,7 @@ const SingleFighterPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      <div className=" overflow-hidden absolute   h-full  w-full ">
+      <div className=" overflow-hidden absolute   h-full  w-full">
         <Vortex className="flex items-center flex-col justify-center  py-4 w-full h-full z-0"></Vortex>
       </div>
       <main className="relative z-10 container mx-auto  min-h-[100vh]">
