@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
-import type { Fighter } from "./fight-board";
+import type { Fighter } from "@/lib/types";
 
 interface CombatCardProps {
   fighterData: Fighter;

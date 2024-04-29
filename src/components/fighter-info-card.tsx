@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { Fighter } from "./fight-board";
+import { Fighter } from "@/lib/types";
 
 interface FighterCardProps {
   fighter: Fighter;

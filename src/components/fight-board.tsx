@@ -6,21 +6,9 @@ import { useState } from "react";
 import { fetchRandomFighters, fightLogic } from "@/services/services";
 import { Vortex } from "./ui/vortex";
 import StartScreen from "./ui/start-screen";
-import { ActiveFightState } from "./active-fight-state";
-
-export interface Fighter {
-  name: string;
-  slug: string;
-  description: string;
-  attack: number;
-  hitpoints: number;
-  weakness: string;
-  imgsrc: string;
-  winStreak: number;
-  totalWins: number;
-  defence: number;
-}
-export type elemental = "fire" | "ice" | "nature" | "lightning";
+import Lottie from "lottie-react";
+import fightAnimation from "../../public/animation/fight-animation.json";
+import { Fighter, elemental } from "@/lib/types";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -31,7 +19,6 @@ const FightBoard = () => {
 
   async function handleClick() {
     setWinner("");
-    setFightActive(true);
     try {
       // Randomly select an elemental state
       const elementalStateOptions = ["fire", "ice", "nature", "lightning"];
@@ -47,6 +34,7 @@ const FightBoard = () => {
 
       setPlayer1(fighter1);
       setPlayer2(fighter2);
+      setFightActive(true);
 
       // fighting logic PUT request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elemental);
@@ -54,7 +42,7 @@ const FightBoard = () => {
       setTimeout(() => {
         setWinner(result);
         setFightActive(false);
-      }, 40);
+      }, 4000);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +64,7 @@ const FightBoard = () => {
             >
               {elemental && (
                 <>
-                  <h3 className=" bg-transparent border-y rounded-t-md mx-1 border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
+                  <h3 className=" bg-transparent border-y rounded-t-md mx-1 -mt-8 bg-black border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
                     The mighty {elemental} Elemental has chosen to interference
                     with the fight
                   </h3>
@@ -91,28 +79,23 @@ const FightBoard = () => {
                 </>
               )}
 
-              <h2 className="text-xs sm:text-base  bg-black text-white border-y border-pink-600 rounded-b-md w-full  z-50 text-center">
-                Winner is {winner}
-              </h2>
+              {winner && (
+                <h2 className="text-base sm:text-lg -mb-8 min-h-8 bg-black text-white border-y border-pink-600 rounded-b-md w-full  z-50 text-center">
+                  Winner is {winner}
+                </h2>
+              )}
             </div>
             <CombatCard fighterData={player2} />
           </>
         ) : (
           <StartScreen />
         )}
-        {/* remake this component entirely belwo */}
-        <div className="  absolute z-[100] ">
-          {elemental && (
-            <>
-              <ActiveFightState
-                player1Name={player1?.name}
-                player2Name={player2?.name}
-                activeFight={fightActive}
-              />
-            </>
-          )}
-          <div className="w-full flex justify-center relative"></div>
-        </div>
+
+        {fightActive && (
+          <div className="w-[40%] absolute z-50 md:top-0">
+            <Lottie animationData={fightAnimation} />
+          </div>
+        )}
       </main>
 
       <div className=" container flex justify-center mx-auto mt-12">

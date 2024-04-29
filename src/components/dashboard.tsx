@@ -20,7 +20,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -30,14 +29,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getDashboardData } from "@/services/services";
-import { QueryResult } from "@vercel/postgres";
 
 export async function Dashboard() {
-  const { recentFights, allFights } = await getDashboardData();
-
-  console.log("Recent Fights:", recentFights);
-  console.log("All Fights:", allFights);
-
+  const {
+    trendingFighters,
+    fightHistory,
+    totalAmountOfFights,
+    biggestWinStreak,
+    mostWins,
+  } = await getDashboardData();
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -45,44 +45,48 @@ export async function Dashboard() {
           <Card x-chunk="dashboard-01-chunk-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total fights generated
+                Total amount of fights generated
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
-              <p className="text-xs text-muted-foreground">
-                +20.1% from last month
-              </p>
+              <div className="text-2xl font-bold">{totalAmountOfFights}</div>
             </CardContent>
           </Card>
           <Card x-chunk="dashboard-01-chunk-1">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                biggest winning spree
+                Biggest winning spree
               </CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <Avatar>
+                <AvatarImage src={`${biggestWinStreak.imgsrc}`} />
+                <AvatarFallback>😱</AvatarFallback>
+              </Avatar>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+2350</div>
-              <p className="text-xs text-muted-foreground">
-                +180.1% from last month
+              <div className="text-2xl font-bold">{biggestWinStreak.name}</div>
+              <p className="text-xs text-muted-foreground pt-2">
+                {biggestWinStreak.winstreak} wins in a row
               </p>
             </CardContent>
           </Card>
           <Card x-chunk="dashboard-01-chunk-2">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sales</CardTitle>
-              <CreditCard className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">
+                Most wins total
+              </CardTitle>
+              <Avatar>
+                <AvatarImage src={`${mostWins.imgsrc}`} />
+                <AvatarFallback>😱</AvatarFallback>
+              </Avatar>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+12,234</div>
-              <p className="text-xs text-muted-foreground">
-                +19% from last month
+              <div className="text-2xl font-bold">{mostWins.name}</div>
+              <p className="text-xs text-muted-foreground pt-2">
+                {mostWins.totalwins} wins in total
               </p>
             </CardContent>
           </Card>
-          <Card x-chunk="dashboard-01-chunk-3">
+          {/* <Card x-chunk="dashboard-01-chunk-3">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Active Now</CardTitle>
               <Activity className="h-4 w-4 text-muted-foreground" />
@@ -93,7 +97,7 @@ export async function Dashboard() {
                 +201 since last hour
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
@@ -113,7 +117,7 @@ export async function Dashboard() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Fighter</TableHead>
+                    <TableHead>Fighters</TableHead>
                     <TableHead className="hidden xl:table-column">
                       Type
                     </TableHead>

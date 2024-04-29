@@ -1,7 +1,7 @@
 "use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { sql } from "@vercel/postgres";
-import { Fighter, elemental } from "../components/fight-board";
+import { Fighter, elemental } from "@/lib/types";
 
 export const fetchRandomFighters = async () => {
   try {
@@ -77,8 +77,14 @@ export const getFighter = async ({
   }
 };
 
-export const getDashboardData = async () => {
-  const recentFights = await sql`
+export const getDashboardData = async (): Promise<{
+  trendingFighters: Fighter[];
+  fightHistory: Fighter[];
+  totalAmountOfFights: number;
+  biggestWinStreak: Fighter;
+  mostWins: Fighter;
+}> => {
+  const trendingFighters = await sql`
   SELECT fighter, COUNT(*) as fight_count
   FROM (
       SELECT fighter1 as fighter FROM recentfights
@@ -90,14 +96,39 @@ export const getDashboardData = async () => {
   LIMIT 5;
   `;
 
-  const allFights = await sql`
+  const fightHistory = await sql`
   SELECT * FROM recentfights
+  `;
 
+  const totalAmountOfFights = await sql`
+  SELECT total_fights FROM statistics;
+  `;
+
+  const biggestWinStreak = await sql`
+  SELECT *
+FROM fighters
+ORDER BY winStreak DESC
+LIMIT 1;
+  `;
+  const mostWins = await sql`
+  SELECT *
+FROM fighters
+ORDER BY totalwins DESC
+LIMIT 1;
   `;
   // add another querys to this promise
-  const data = await Promise.all([recentFights.rows, allFights.rows]);
+  const data = await Promise.all([
+    trendingFighters.rows,
+    fightHistory.rows,
+    totalAmountOfFights.rows[0].total_fights,
+    biggestWinStreak.rows[0],
+    mostWins.rows[0],
+  ]);
   return {
-    recentFights: data[0], // Access the first element for recentFights
-    allFights: data[1], // Access the second element for allFights
+    trendingFighters: data[0] as Fighter[], // Access the first element for recentFights
+    fightHistory: data[1] as Fighter[], // Access the second element for allFights
+    totalAmountOfFights: data[2], // Access the third element for totalFights
+    biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
+    mostWins: data[4] as Fighter, // Access the fifth element for mostWins
   };
 };
