@@ -15,7 +15,8 @@ export async function GET(request: Request) {
 
     const randomFighter1 = res.rows[0];
     const randomFighter2 = res.rows[1];
-
+    console.log("randomFighter1", randomFighter1);
+    console.log("randomFighter2", randomFighter2);
     return NextResponse.json({
       fighter1: randomFighter1,
       fighter2: randomFighter2,
