@@ -1,12 +1,10 @@
-"use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { sql } from "@vercel/postgres";
 import { Fighter, elemental } from "@/lib/types";
-
 export const fetchRandomFighters = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/fighters`, {
-      method: "POST",
+      method: "GET",
       cache: "no-store",
     });
     const data = await response.json();
@@ -40,7 +38,6 @@ export const fightLogic = async (
 };
 
 export const getAllFighters = async (): Promise<Fighter[]> => {
-  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/all-fighters`);
 
@@ -61,7 +58,6 @@ export const getFighter = async ({
 }: {
   slug: string;
 }): Promise<Fighter> => {
-  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/single-fighter/${slug}`);
 
