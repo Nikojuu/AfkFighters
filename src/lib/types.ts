@@ -9,6 +9,7 @@ export interface Fighter {
   winstreak: number;
   totalwins: number;
   defence: number;
+  lore: string;
 }
 
 export type elemental = "fire" | "ice" | "nature" | "lightning";

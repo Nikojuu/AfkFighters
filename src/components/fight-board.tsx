@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import CombatCard from "./combat-card";
-import { Button } from "./ui/button";
 import { useState } from "react";
 import { fetchRandomFighters, fightLogic } from "@/services/services";
 import { Vortex } from "./ui/vortex";
@@ -9,6 +8,7 @@ import StartScreen from "./ui/start-screen";
 import Lottie from "lottie-react";
 import fightAnimation from "../../public/animation/fight-animation.json";
 import { Fighter, elemental } from "@/lib/types";
+import ShinyButton from "./ui/shiny-button";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -38,6 +38,7 @@ const FightBoard = () => {
 
       // fighting logic PUT request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elemental);
+
       // client side delay to simulate fight
       setTimeout(() => {
         setWinner(result);
@@ -55,7 +56,9 @@ const FightBoard = () => {
       </div>
 
       <main className="relative flex-col md:flex-row flex items-center justify-center  h-[80vh] md:h-[70vh]  md:mt-20 mt-10 container mx-auto ">
-        {player1 && player2 ? (
+        {/* // cannot conditionally render CombatCard and StartScreen with ? operator it will cause bug for some reason thats why
+        rendered seperately */}
+        {player1 && player2 && (
           <>
             <CombatCard fighterData={player1} />
             <div
@@ -64,7 +67,7 @@ const FightBoard = () => {
             >
               {elemental && (
                 <>
-                  <h3 className=" bg-transparent border-y rounded-t-md mx-1 -mt-8 bg-black border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
+                  <h3 className="  border-y rounded-t-md mx-1 -mt-8 bg-black border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
                     The mighty {elemental} Elemental has chosen to interference
                     with the fight
                   </h3>
@@ -87,9 +90,8 @@ const FightBoard = () => {
             </div>
             <CombatCard fighterData={player2} />
           </>
-        ) : (
-          <StartScreen />
         )}
+        {!player1 && !player2 && <StartScreen />}
 
         {fightActive && (
           <div className="w-[40%] absolute z-50 md:top-0">
@@ -98,12 +100,8 @@ const FightBoard = () => {
         )}
       </main>
 
-      <div className=" container flex justify-center mx-auto mt-12">
-        {!fightActive && (
-          <Button className="z-[1000]" onClick={handleClick}>
-            Generate Fight
-          </Button>
-        )}
+      <div className=" container flex justify-center mx-auto mt-12 ">
+        {!fightActive && <ShinyButton onClick={handleClick}></ShinyButton>}
       </div>
     </>
   );

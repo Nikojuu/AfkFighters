@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import ShinyButton from "@/components/ui/shiny-button";
 import { SparklesHero } from "@/components/ui/sparkles-hero";
 import { Vortex } from "@/components/ui/vortex";
 import Link from "next/link";
@@ -6,15 +7,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className=" overflow-hidden absolute top-[30vh]   h-full  w-full z-10 ">
-        <Vortex className="flex items-center flex-col justify-  py-4 w-full  h-full z-0"></Vortex>
-      </div>
       <main className="min-h-screen z-50 relative ">
         <SparklesHero />
         <div className="flex justify-center gap-12 z-20">
-          <Button asChild>
-            <Link href="/fight">Start Fighting</Link>
-          </Button>
+          <Link href="/fight">
+            <ShinyButton />
+          </Link>
           <Button asChild variant={"outline"}>
             <Link href="/dashboard">Dashboard</Link>
           </Button>

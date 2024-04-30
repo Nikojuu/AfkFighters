@@ -19,9 +19,9 @@ async function insertData() {
     for (const fighter of allFighters.fighters) {
       // Construct SQL query to insert each fighter into the database
       await sql`
-      INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence)
-      VALUES (${fighter.name}, ${fighter.slug}, ${fighter.description}, ${fighter.attack}, ${fighter.hitpoints}, ${fighter.weakness}, ${fighter.imgSrc}, ${fighter.winStreak}, ${fighter.totalWins}, ${fighter.defence})
-      ON CONFLICT (Slug) DO NOTHING;
+      INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence, lore)
+      VALUES (${fighter.name}, ${fighter.slug}, ${fighter.description}, ${fighter.attack}, ${fighter.hitpoints}, ${fighter.weakness}, ${fighter.imgSrc}, ${fighter.winStreak}, ${fighter.totalWins}, ${fighter.defence}, ${fighter.lore})
+      ;
       
       `;
     }

@@ -10,7 +10,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     // Function to calculate damage based on attacker's attack and defender's defense
     const calculateDamage = (attacker: Fighter, defender: Fighter) => {
+      const minimumDamage = 10; // Minimum damage threshold
       let damage = Math.max(attacker.attack - defender.defence, 0);
+
+      // Ensure that damage is at least the minimum damage threshold
+      damage = Math.max(damage, minimumDamage);
 
       return damage;
     };
@@ -64,6 +68,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     // return the result of the fight
     const result = initiateFight(fighter1, fighter2, elemental);
     //update the statistics in database
+
     updateStats(fighter1, fighter2, result);
 
     return NextResponse.json(result);
