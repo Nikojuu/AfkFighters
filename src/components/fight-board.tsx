@@ -36,6 +36,7 @@ const FightBoard = () => {
       setPlayer1(fighter1);
       setPlayer2(fighter2);
       setFightActive(true);
+      console.log(fighter1, fighter2, elementalState);
 
       // fighting logic PUT request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elemental);
