@@ -9,6 +9,7 @@ import Lottie from "lottie-react";
 import fightAnimation from "../../public/animation/fight-animation.json";
 import { Fighter, elemental } from "@/lib/types";
 import ShinyButton from "./ui/shiny-button";
+export const dynamic = "force-dynamic";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
