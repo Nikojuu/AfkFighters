@@ -7,6 +7,9 @@ export const fetchRandomFighters = async () => {
   "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/fighters`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
       cache: "no-store",
     });
     const data = await response.json();
