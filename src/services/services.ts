@@ -4,11 +4,9 @@ import { sql } from "@vercel/postgres";
 import { Fighter, elemental } from "@/lib/types";
 
 export const fetchRandomFighters = async () => {
-  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/fighters`, {
-      method: "PUT",
-      next: { revalidate: 0 },
+      cache: "no-store",
     });
     const data = await response.json();
 

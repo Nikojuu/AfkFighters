@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
-export async function PUT(request: Request) {
+
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   console.log("searchParams", searchParams);
   try {
@@ -12,12 +13,10 @@ export async function PUT(request: Request) {
     `;
 
     const res = await query;
-    await sql`UPDATE statistics SET total_fights = total_fights + 1`;
 
     const randomFighter1 = res.rows[0];
     const randomFighter2 = res.rows[1];
-    console.log("randomFighter1", randomFighter1);
-    console.log("randomFighter2", randomFighter2);
+
     return NextResponse.json({
       fighter1: randomFighter1,
       fighter2: randomFighter2,
