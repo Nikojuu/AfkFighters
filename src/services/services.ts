@@ -3,7 +3,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { sql } from "@vercel/postgres";
 import { Fighter, elemental } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
 export const fetchRandomFighters = async () => {
   "use server";
   try {
