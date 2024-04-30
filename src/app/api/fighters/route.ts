@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
+  console.log("searchParams", searchParams);
   try {
     // Execute SQL query to select two random fighters from the database
     const query = sql`
@@ -15,7 +16,8 @@ export async function GET(request: Request) {
 
     const randomFighter1 = res.rows[0];
     const randomFighter2 = res.rows[1];
-
+    console.log("randomFighter1", randomFighter1);
+    console.log("randomFighter2", randomFighter2);
     return NextResponse.json({
       fighter1: randomFighter1,
       fighter2: randomFighter2,
