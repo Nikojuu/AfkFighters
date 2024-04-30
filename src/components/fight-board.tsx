@@ -32,6 +32,7 @@ const FightBoard = () => {
       // Fetch 2 random fighters and set them to state
       const { fighter1, fighter2 }: { fighter1: Fighter; fighter2: Fighter } =
         await fetchRandomFighters();
+      console.log(fighter1, fighter2);
 
       setPlayer1(fighter1);
       setPlayer2(fighter2);
