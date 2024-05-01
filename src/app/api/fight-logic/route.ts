@@ -11,11 +11,15 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     // Function to calculate damage based on attacker's attack and defender's defense
     const calculateDamage = (attacker: Fighter, defender: Fighter) => {
       const minimumDamage = 10; // Minimum damage threshold
-      let damage = Math.max(attacker.attack - defender.defence, 0);
+      const defenseMultiplier = 0.5; // Adjust this multiplier as needed
 
+      let damage = Math.max(
+        attacker.attack - defender.defence * defenseMultiplier,
+        0
+      );
       // Ensure that damage is at least the minimum damage threshold
       damage = Math.max(damage, minimumDamage);
-
+      console.log(damage);
       return damage;
     };
 
@@ -42,7 +46,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
           // Apply penalty to attack
           if (attacker.weakness === opponent.weakness) {
             attacker.attack = attacker.attack;
-          } else attacker.attack -= 20;
+          } else {
+            attacker.attack -= 80;
+            attacker.defence -= 40;
+            attacker.hitpoints -= 60;
+          }
         }
 
         // Calculate damage
