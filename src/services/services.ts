@@ -2,6 +2,7 @@
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { sql } from "@vercel/postgres";
 import { Fighter, elemental } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
 export const fetchRandomFighters = async () => {
   try {
@@ -116,6 +117,7 @@ FROM fighters
 ORDER BY totalwins DESC
 LIMIT 1;
   `;
+  revalidatePath("/dashboard");
   // add another querys to this promise
   const data = await Promise.all([
     trendingFighters.rows,
