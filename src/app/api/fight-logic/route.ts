@@ -90,15 +90,14 @@ const updateStats = async (
   fighter2: Fighter,
   winner: string
 ) => {
-  const fightDate = new Date().toISOString();
-
   try {
     await fetch(`${BASE_URL}/api/delete-old-records`, {
       method: "DELETE",
     });
 
     // Insert the fight data into the database
-    await sql`INSERT INTO recentfights (fighter1, fighter2, winner, fight_date) VALUES (${fighter1.name}, ${fighter2.name}, ${winner}, ${fightDate})`;
+    await sql`INSERT INTO recentfights (fighter1, fighter2, winner, fight_date)
+              VALUES (${fighter1.name}, ${fighter2.name}, ${winner}, CURRENT_TIMESTAMP)`;
 
     // Increment the total fights count in the database
     await sql`UPDATE statistics SET total_fights = total_fights + 1`;

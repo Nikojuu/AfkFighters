@@ -1,7 +1,7 @@
 "use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { sql } from "@vercel/postgres";
-import { Fighter, elemental } from "@/lib/types";
+import { Fighter, RecentFight, elemental } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
 export const fetchRandomFighters = async () => {
@@ -40,7 +40,6 @@ export const fightLogic = async (
 };
 
 export const getAllFighters = async (): Promise<Fighter[]> => {
-  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/all-fighters`);
 
@@ -49,6 +48,7 @@ export const getAllFighters = async (): Promise<Fighter[]> => {
     }
 
     const data: Fighter[] = await response.json();
+
     return data;
   } catch (error) {
     console.error("Error in getAllFighters:", error);
@@ -80,25 +80,35 @@ export const getFighter = async ({
 
 export const getDashboardData = async (): Promise<{
   trendingFighters: Fighter[];
-  fightHistory: Fighter[];
+  fightHistory: RecentFight[];
   totalAmountOfFights: number;
   biggestWinStreak: Fighter;
   mostWins: Fighter;
 }> => {
   const trendingFighters = await sql`
-  SELECT fighter, COUNT(*) as fight_count
-  FROM (
-      SELECT fighter1 as fighter FROM recentfights
-      UNION ALL
-      SELECT fighter2 as fighter FROM recentfights
-  ) AS all_fighters
-  GROUP BY fighter
-  ORDER BY fight_count DESC
-  LIMIT 5;
+  SELECT fighters.*, COALESCE(fight_count, 0) AS fight_count
+  FROM fighters
+  LEFT JOIN (
+      SELECT fighter, COUNT(*) as fight_count
+      FROM (
+          SELECT fighter1 as fighter FROM recentfights
+          UNION ALL
+          SELECT fighter2 as fighter FROM recentfights
+      ) AS all_fighters
+      GROUP BY fighter
+  ) AS trendingFighters ON fighters.name = trendingFighters.fighter
+  ORDER BY COALESCE(fight_count, 0) DESC
+  LIMIT 10;
+  
+
+
+  
   `;
 
   const fightHistory = await sql`
   SELECT * FROM recentfights
+  ORDER BY id DESC
+  LIMIT 10;
   `;
 
   const totalAmountOfFights = await sql`
@@ -128,7 +138,7 @@ LIMIT 1;
   ]);
   return {
     trendingFighters: data[0] as Fighter[], // Access the first element for recentFights
-    fightHistory: data[1] as Fighter[], // Access the second element for allFights
+    fightHistory: data[1] as RecentFight[], // Access the second element for allFights
     totalAmountOfFights: data[2], // Access the third element for totalFights
     biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
     mostWins: data[4] as Fighter, // Access the fifth element for mostWins
