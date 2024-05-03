@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
@@ -17,22 +17,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${audiowide.variable} ${unkempt.variable} selection:text-black selection:bg-pink-600`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${audiowide.variable} ${unkempt.variable} selection:text-black selection:bg-pink-600`}
         >
-          <Navbar />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
 
-          {children}
-        </ThemeProvider>
-        <Footer />
-      </body>
-    </html>
+            {children}
+          </ThemeProvider>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

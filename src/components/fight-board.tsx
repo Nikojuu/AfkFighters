@@ -9,6 +9,7 @@ import Lottie from "lottie-react";
 import fightAnimation from "../../public/animation/fight-animation.json";
 import { Fighter, elemental } from "@/lib/types";
 import ShinyButton from "./ui/shiny-button";
+import Loader from "./Loader";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -16,9 +17,11 @@ const FightBoard = () => {
   const [player2, setPlayer2] = useState<Fighter | null>(null);
   const [winner, setWinner] = useState("");
   const [fightActive, setFightActive] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleClick() {
     setWinner("");
+    setLoading(true);
     try {
       // Randomly select an elemental state
       const elementalStateOptions = ["fire", "ice", "nature", "lightning"];
@@ -31,7 +34,7 @@ const FightBoard = () => {
       // Fetch 2 random fighters and set them to state
       const { fighter1, fighter2 }: { fighter1: Fighter; fighter2: Fighter } =
         await fetchRandomFighters();
-
+      setLoading(false);
       setPlayer1(fighter1);
       setPlayer2(fighter2);
       setFightActive(true);
@@ -58,9 +61,11 @@ const FightBoard = () => {
       <main className="relative flex-col md:flex-row flex items-center justify-center  h-[80vh] md:h-[70vh]  md:mt-20 mt-10 container mx-auto ">
         {/* // cannot conditionally render CombatCard and StartScreen with ? operator it will cause bug for some reason thats why
         rendered seperately */}
-        {player1 && player2 && (
+        {loading && <Loader />}
+        {player1 && player2 && !loading && (
           <>
             <CombatCard fighterData={player1} />
+
             <div
               className="z-50 flex flex-col justify-between place-items-center h-1/2 
               sm:h-full mx-5 lg:mx-12 lg:min-w-[25rem]"
@@ -91,7 +96,8 @@ const FightBoard = () => {
             <CombatCard fighterData={player2} />
           </>
         )}
-        {!player1 && !player2 && <StartScreen />}
+
+        {!player1 && !player2 && !loading && <StartScreen />}
 
         {fightActive && (
           <div className="w-[40%] absolute z-50 md:top-0">

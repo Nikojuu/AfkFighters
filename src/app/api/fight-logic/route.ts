@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       );
       // Ensure that damage is at least the minimum damage threshold
       damage = Math.max(damage, minimumDamage);
-      console.log(damage);
+
       return damage;
     };
 
@@ -67,7 +67,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
       // Determine name of the winner
       if (fighter1.hitpoints <= 0) {
-        return `${fighter2.name} `;
+        return `${fighter2.name}`;
       } else {
         return `${fighter1.name}`;
       }

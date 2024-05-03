@@ -4,7 +4,7 @@ import { sql } from "@vercel/postgres";
 import { QueryResultRow } from "@vercel/postgres";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const result = await sql`
