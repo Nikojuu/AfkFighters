@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 export const fetchRandomFighters = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/fighters`, {
+      method: "POST",
       cache: "no-store",
     });
     const data = await response.json();
