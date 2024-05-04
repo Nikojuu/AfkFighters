@@ -94,9 +94,9 @@ const updateStats = async (
   winner: string
 ) => {
   try {
-    await fetch(`${BASE_URL}/api/delete-old-records`, {
-      method: "DELETE",
-    });
+    // await fetch(`${BASE_URL}/api/delete-old-records`, {
+    //   method: "DELETE",
+    // });
 
     // Insert the fight data into the database
     await sql`INSERT INTO recentfights (fighter1, fighter2, winner, fight_date)
