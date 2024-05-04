@@ -25,8 +25,7 @@ export const fightLogic = async (
 ) => {
   try {
     const response = await fetch(`${BASE_URL}/api/fight-logic`, {
-      method: "PUT",
-      cache: "no-store",
+      method: "POST",
 
       body: JSON.stringify({ fighter1, fighter2, elemental }),
     });

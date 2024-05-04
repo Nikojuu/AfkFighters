@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 import type { Fighter, elemental } from "@/lib/types";
 
-export const PUT = async (req: NextRequest) => {
+export const POST = async (req: NextRequest) => {
   try {
     const { fighter1, fighter2, elemental } = await req.json();
 
@@ -40,7 +40,7 @@ export const PUT = async (req: NextRequest) => {
       let attacker = fighter1;
       let opponent = fighter2;
 
-      while (fighter1.hitpoints > 0 && fighter2.hitpoints > 0) {
+      while (attacker.hitpoints > 0 && opponent.hitpoints > 0) {
         // Check if the current fighter is weak against the environment
         if (isWeakAgainstEnvironment(attacker, environment)) {
           // Apply penalty to attack

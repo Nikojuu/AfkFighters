@@ -38,8 +38,7 @@ const FightBoard = () => {
       setPlayer2(fighter2);
       setFightActive(true);
 
-      console.log(fighter1, fighter2, elementalState);
-      // fighting logic PUT request to the server and set the winner to state
+      // fighting logic POST request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elementalState);
       console.log(result);
       // client side delay to simulate fight
