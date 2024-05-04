@@ -29,18 +29,19 @@ const FightBoard = () => {
         Math.floor(Math.random() * elementalStateOptions.length)
       ] as elemental;
 
-      setElemental(elementalState);
       // Fetch 2 random fighters and set them to state
       const { fighter1, fighter2 }: { fighter1: Fighter; fighter2: Fighter } =
         await fetchRandomFighters();
+      setElemental(elementalState);
       setLoading(false);
       setPlayer1(fighter1);
       setPlayer2(fighter2);
       setFightActive(true);
 
+      console.log(fighter1, fighter2, elementalState);
       // fighting logic PUT request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elementalState);
-
+      console.log(result);
       // client side delay to simulate fight
       setTimeout(() => {
         setWinner(result);
