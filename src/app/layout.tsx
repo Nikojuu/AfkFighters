@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import { audiowide, unkempt } from "./fonts/fonts";
 
 export const metadata: Metadata = {
   title: "AFK Fighers",
@@ -18,20 +17,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${audiowide.variable} ${unkempt.variable} selection:text-black selection:bg-pink-600`}
         >
-          <Navbar />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
 
-          {children}
-        </ThemeProvider>
-        <Footer />
-      </body>
-    </html>
+            {children}
+          </ThemeProvider>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

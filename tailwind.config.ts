@@ -13,6 +13,10 @@ const config = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      audiowide: ["var(--font-audiowide)", "sans-serif"],
+      unkempt: ["var(--font-unkempt)", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",

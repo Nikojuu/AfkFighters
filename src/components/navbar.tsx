@@ -5,41 +5,13 @@ import { Button } from "@/components/ui/button";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
+import NavLinks from "./nav-links";
 
 export default function Navbar() {
   return (
     <div className="flex relative z-10 w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 md:w-full md:justify-between">
-          <div className="flex gap-12">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-lg mr-24 font-semibold md:text-base"
-            >
-              <span>Afk Fighters</span>
-            </Link>
-            {/* get pathname and update active stage depending on that */}
-            <Link
-              href="/dashboard"
-              className="text-foreground transition-colors hover:text-foreground"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/fight"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Fight
-            </Link>
-            <Link
-              href="/fighters"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              All fighters
-            </Link>
-          </div>
-          <ThemeToggle />
-        </nav>
+        <NavLinks />
         <Sheet>
           <SheetTrigger asChild>
             <Button
