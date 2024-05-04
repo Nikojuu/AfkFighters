@@ -2,7 +2,7 @@
 import Image from "next/image";
 import CombatCard from "./combat-card";
 import { useState } from "react";
-import { fetchRandomFighters, fightLogic } from "@/services/services";
+import { fetchRandomFighters } from "@/services/services";
 import { Vortex } from "./ui/vortex";
 import StartScreen from "./ui/start-screen";
 import Lottie from "lottie-react";
@@ -10,6 +10,7 @@ import fightAnimation from "../../public/animation/fight-animation.json";
 import { Fighter, elemental } from "@/lib/types";
 import ShinyButton from "./ui/shiny-button";
 import Loader from "./Loader";
+import { fightLogic } from "@/services/actions";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -39,11 +40,11 @@ const FightBoard = () => {
       setFightActive(true);
 
       // fighting logic POST request to the server and set the winner to state
-      const result = await fightLogic(fighter1, fighter2, elementalState);
+      const result = await fightLogic({ fighter1, fighter2, elementalState });
       console.log(result);
       // client side delay to simulate fight
       setTimeout(() => {
-        setWinner(result);
+        setWinner(result || ""); // Ensure that result is always a string
         setFightActive(false);
       }, 4000);
     } catch (error) {
