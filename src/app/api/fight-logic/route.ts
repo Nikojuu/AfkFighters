@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 import type { Fighter, elemental } from "@/lib/types";
 
-export const POST = async (req: NextRequest) => {
+export const PUT = async (req: NextRequest) => {
   try {
     const { fighter1, fighter2, elemental } = await req.json();
 
@@ -77,7 +77,7 @@ export const POST = async (req: NextRequest) => {
     const result = initiateFight(fighter1, fighter2, elemental);
     //update the statistics in database
 
-    updateStats(fighter1, fighter2, result);
+    // updateStats(fighter1, fighter2, result);
 
     return NextResponse.json(result);
   } catch (error) {
