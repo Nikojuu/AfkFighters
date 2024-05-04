@@ -77,7 +77,7 @@ export const PUT = async (req: NextRequest) => {
     const result = await initiateFight(fighter1, fighter2, elemental);
     //update the statistics in database
 
-    // updateStats(fighter1, fighter2, result);
+    updateStats(fighter1, fighter2, result);
 
     return NextResponse.json(result);
   } catch (error) {
