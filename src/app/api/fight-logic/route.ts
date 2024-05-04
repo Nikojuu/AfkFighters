@@ -32,7 +32,7 @@ export const PUT = async (req: NextRequest) => {
     };
 
     // Function to simulate a fight between two fighters
-    const initiateFight = (
+    const initiateFight = async (
       fighter1: Fighter,
       fighter2: Fighter,
       environment: elemental
@@ -74,10 +74,10 @@ export const PUT = async (req: NextRequest) => {
     };
 
     // return the result of the fight
-    const result = initiateFight(fighter1, fighter2, elemental);
+    const result = await initiateFight(fighter1, fighter2, elemental);
     //update the statistics in database
 
-    // updateStats(fighter1, fighter2, result);
+    updateStats(fighter1, fighter2, result);
 
     return NextResponse.json(result);
   } catch (error) {
