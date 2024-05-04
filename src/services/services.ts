@@ -1,6 +1,8 @@
 "use server";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-import { Fighter, elemental } from "../components/fight-board";
+import { sql } from "@vercel/postgres";
+import { Fighter, RecentFight, elemental } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
 export const fetchRandomFighters = async () => {
   try {
@@ -38,7 +40,6 @@ export const fightLogic = async (
 };
 
 export const getAllFighters = async (): Promise<Fighter[]> => {
-  "use server";
   try {
     const response = await fetch(`${BASE_URL}/api/all-fighters`);
 
@@ -47,6 +48,7 @@ export const getAllFighters = async (): Promise<Fighter[]> => {
     }
 
     const data: Fighter[] = await response.json();
+
     return data;
   } catch (error) {
     console.error("Error in getAllFighters:", error);
@@ -76,22 +78,69 @@ export const getFighter = async ({
   }
 };
 
-// move to database service if time
-// export const getAllFighters = async () => {
-//   const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-//   const fightersFile = await fs.readFile(fightersFilePath, "utf8");
-//   const data = JSON.parse(fightersFile);
-//   return data.fighters;
-// };
+export const getDashboardData = async (): Promise<{
+  trendingFighters: Fighter[];
+  fightHistory: RecentFight[];
+  totalAmountOfFights: number;
+  biggestWinStreak: Fighter;
+  mostWins: Fighter;
+}> => {
+  const trendingFighters = await sql`
+  SELECT fighters.*, COALESCE(fight_count, 0) AS fight_count
+  FROM fighters
+  LEFT JOIN (
+      SELECT fighter, COUNT(*) as fight_count
+      FROM (
+          SELECT fighter1 as fighter FROM recentfights
+          UNION ALL
+          SELECT fighter2 as fighter FROM recentfights
+      ) AS all_fighters
+      GROUP BY fighter
+  ) AS trendingFighters ON fighters.name = trendingFighters.fighter
+  ORDER BY COALESCE(fight_count, 0) DESC
+  LIMIT 10;
+  
 
-// export const getFighter = async (slug: string) => {
-//   const fightersFilePath = process.cwd() + "/src/database/fighters.json";
-//   const fightersFile = await fs.readFile(fightersFilePath, "utf8");
 
-//   const data = JSON.parse(fightersFile);
-//   const fighter = data.fighters.find(
-//     (fighter: Fighter) => fighter.slug === slug
-//   );
+  
+  `;
 
-//   return fighter;
-// };
+  const fightHistory = await sql`
+  SELECT * FROM recentfights
+  ORDER BY id DESC
+  LIMIT 10;
+  `;
+
+  const totalAmountOfFights = await sql`
+  SELECT total_fights FROM statistics;
+  `;
+
+  const biggestWinStreak = await sql`
+  SELECT *
+FROM fighters
+ORDER BY winStreak DESC
+LIMIT 1;
+  `;
+  const mostWins = await sql`
+  SELECT *
+FROM fighters
+ORDER BY totalwins DESC
+LIMIT 1;
+  `;
+  revalidatePath("/dashboard");
+  // add another querys to this promise
+  const data = await Promise.all([
+    trendingFighters.rows,
+    fightHistory.rows,
+    totalAmountOfFights.rows[0].total_fights,
+    biggestWinStreak.rows[0],
+    mostWins.rows[0],
+  ]);
+  return {
+    trendingFighters: data[0] as Fighter[], // Access the first element for recentFights
+    fightHistory: data[1] as RecentFight[], // Access the second element for allFights
+    totalAmountOfFights: data[2], // Access the third element for totalFights
+    biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
+    mostWins: data[4] as Fighter, // Access the fifth element for mostWins
+  };
+};

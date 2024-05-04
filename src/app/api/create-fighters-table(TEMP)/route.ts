@@ -1,7 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
     const result = await sql`
       CREATE TABLE IF NOT EXISTS Fighters (
@@ -14,7 +14,8 @@ export async function GET(request: Request) {
         ImgSrc VARCHAR(255),
         WinStreak INT,
         TotalWins INT,
-        Defence INT
+        Defence INT,
+        lore TEXT
       );
     `;
     return NextResponse.json({ result }, { status: 200 });

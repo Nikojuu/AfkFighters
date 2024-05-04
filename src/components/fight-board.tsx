@@ -1,26 +1,15 @@
 "use client";
 import Image from "next/image";
 import CombatCard from "./combat-card";
-import { Button } from "./ui/button";
 import { useState } from "react";
 import { fetchRandomFighters, fightLogic } from "@/services/services";
 import { Vortex } from "./ui/vortex";
 import StartScreen from "./ui/start-screen";
-import { ActiveFightState } from "./active-fight-state";
-
-export interface Fighter {
-  name: string;
-  slug: string;
-  description: string;
-  attack: number;
-  hitpoints: number;
-  weakness: string;
-  imgsrc: string;
-  winStreak: number;
-  totalWins: number;
-  defence: number;
-}
-export type elemental = "fire" | "ice" | "nature" | "lightning";
+import Lottie from "lottie-react";
+import fightAnimation from "../../public/animation/fight-animation.json";
+import { Fighter, elemental } from "@/lib/types";
+import ShinyButton from "./ui/shiny-button";
+import Loader from "./Loader";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -28,10 +17,11 @@ const FightBoard = () => {
   const [player2, setPlayer2] = useState<Fighter | null>(null);
   const [winner, setWinner] = useState("");
   const [fightActive, setFightActive] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleClick() {
     setWinner("");
-    setFightActive(true);
+    setLoading(true);
     try {
       // Randomly select an elemental state
       const elementalStateOptions = ["fire", "ice", "nature", "lightning"];
@@ -44,17 +34,19 @@ const FightBoard = () => {
       // Fetch 2 random fighters and set them to state
       const { fighter1, fighter2 }: { fighter1: Fighter; fighter2: Fighter } =
         await fetchRandomFighters();
-
+      setLoading(false);
       setPlayer1(fighter1);
       setPlayer2(fighter2);
+      setFightActive(true);
 
       // fighting logic PUT request to the server and set the winner to state
       const result = await fightLogic(fighter1, fighter2, elemental);
+
       // client side delay to simulate fight
       setTimeout(() => {
         setWinner(result);
         setFightActive(false);
-      }, 40);
+      }, 4000);
     } catch (error) {
       console.log(error);
     }
@@ -67,13 +59,20 @@ const FightBoard = () => {
       </div>
 
       <main className="relative flex-col md:flex-row flex items-center justify-center  h-[80vh] md:h-[70vh]  md:mt-20 mt-10 container mx-auto ">
-        {player1 && player2 ? (
+        {/* // cannot conditionally render CombatCard and StartScreen with ? operator it will cause bug for some reason thats why
+        rendered seperately */}
+        {loading && <Loader />}
+        {player1 && player2 && !loading && (
           <>
             <CombatCard fighterData={player1} />
-            <div className="z-50 flex flex-col justify-between place-items-center h-1/2  sm:h-full mx-5 lg:mx-12 ">
+
+            <div
+              className="z-50 flex flex-col justify-between place-items-center h-1/2 
+              sm:h-full mx-5 lg:mx-12 lg:min-w-[25rem]"
+            >
               {elemental && (
                 <>
-                  <h3 className=" bg-transparent border-y rounded-t-md mx-1 border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
+                  <h3 className="  border-y rounded-t-md mx-1 -mt-8 bg-black border-pink-600 text-white  text-center  w-full  text-xs sm:text-base">
                     The mighty {elemental} Elemental has chosen to interference
                     with the fight
                   </h3>
@@ -88,36 +87,27 @@ const FightBoard = () => {
                 </>
               )}
 
-              <h2 className="text-xs sm:text-base  bg-black text-white border-y border-pink-600 rounded-b-md w-full  z-50 text-center">
-                Winner is {winner}
-              </h2>
+              {winner && (
+                <h2 className="text-base sm:text-lg -mb-8 min-h-8 bg-black text-white border-y border-pink-600 rounded-b-md w-full  z-50 text-center">
+                  Winner is {winner}
+                </h2>
+              )}
             </div>
             <CombatCard fighterData={player2} />
           </>
-        ) : (
-          <StartScreen />
         )}
 
-        <div className=" h-[30rem] w-[40rem] absolute z-[100] ">
-          {elemental && (
-            <>
-              <ActiveFightState
-                player1Name={player1?.name}
-                player2Name={player2?.name}
-                activeFight={fightActive}
-              />
-            </>
-          )}
-          <div className="w-full flex justify-center relative"></div>
-        </div>
+        {!player1 && !player2 && !loading && <StartScreen />}
+
+        {fightActive && (
+          <div className="w-[40%] absolute z-50 md:top-0">
+            <Lottie animationData={fightAnimation} />
+          </div>
+        )}
       </main>
 
-      <div className=" container flex justify-center mx-auto mt-12">
-        {!fightActive && (
-          <Button className="z-[1000]" onClick={handleClick}>
-            Generate Fight
-          </Button>
-        )}
+      <div className=" container flex justify-center mx-auto mt-12 ">
+        {!fightActive && <ShinyButton onClick={handleClick}></ShinyButton>}
       </div>
     </>
   );

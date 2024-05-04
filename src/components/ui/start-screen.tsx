@@ -1,6 +1,6 @@
 const StartScreen = () => {
   return (
-    <div className="w-[40rem] h-96 bg-transparent rounded-2xl mx-auto pt-40">
+    <div className=" glass-box rounded-2xl mx-auto py-8 px-16 box-shadow ">
       <h2 className=" text-white text-center text-2xl">
         Welcome to the eternal clash between two mighty animal warriors, trapped
         in an endless loop within a cosmic vortex! With no escape in sight and
