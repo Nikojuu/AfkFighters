@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const NavLinks = () => {
   const pathname = usePathname();
-  console.log(pathname);
+
   // pathname is the current path of the page /, /dashboard, /fight, /fighters
   return (
     <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 md:w-full md:justify-between">
@@ -44,6 +44,16 @@ const NavLinks = () => {
           } transition-colors hover:text-foreground`}
         >
           All fighters
+        </Link>
+        <Link
+          href="/create-charter"
+          className={`${
+            pathname === "/create-charter"
+              ? "text-foreground"
+              : "text-muted-foreground"
+          } transition-colors hover:text-foreground`}
+        >
+          Create new fighter
         </Link>
       </div>
       <ThemeToggle />

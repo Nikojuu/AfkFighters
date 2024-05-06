@@ -115,3 +115,9 @@ const updateStats = async (
     throw new Error("An error occurred while updating statistics.");
   }
 };
+
+export const createFighter = async (data: FormData) => {
+  const name = data.get("name");
+  const picture = data.get("picture");
+  console.log(name, picture);
+};

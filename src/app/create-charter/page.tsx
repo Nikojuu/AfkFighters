@@ -1,16 +1,12 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
-const CreateCharterPage = () => {
-  const { has, userId } = auth();
-  console.log("userId", userId);
+import CreateChar from "@/components/create-char";
+import NoAuthorization from "@/components/no-authorization";
+import { Protect } from "@clerk/nextjs";
 
-  const canManage = has({ permission: "org:team_settings:manage" });
-
-  if (!canManage) return null;
+const CreateCharterPage = async () => {
   return (
-    <div>
-      {userId && <h1>user id: {userId}</h1>}
-      <h1>create char</h1>
-    </div>
+    <Protect permission="org:feature:permission" fallback={<NoAuthorization />}>
+      <CreateChar />
+    </Protect>
   );
 };
 
