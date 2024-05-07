@@ -119,5 +119,21 @@ const updateStats = async (
 export const createFighter = async (data: FormData) => {
   const name = data.get("name");
   const picture = data.get("picture");
-  console.log(name, picture);
+  const weakness = data.get("weakness");
+  const attack = data.get("attack");
+  const defence = data.get("defence");
+  const hitpoints = data.get("hitpoints");
+  const description = data.get("description");
+  const lore = data.get("lore");
+
+  console.log(
+    name,
+    picture,
+    weakness,
+    attack,
+    defence,
+    hitpoints,
+    description,
+    lore
+  );
 };
