@@ -2,7 +2,7 @@
 import Image from "next/image";
 import CombatCard from "./combat-card";
 import { useState } from "react";
-import { fetchRandomFighters, fightLogic } from "@/services/services";
+import { fetchRandomFighters } from "@/services/services";
 import { Vortex } from "./ui/vortex";
 import StartScreen from "./ui/start-screen";
 import Lottie from "lottie-react";
@@ -10,6 +10,7 @@ import fightAnimation from "../../public/animation/fight-animation.json";
 import { Fighter, elemental } from "@/lib/types";
 import ShinyButton from "./ui/shiny-button";
 import Loader from "./Loader";
+import { fightLogic } from "@/services/actions";
 
 const FightBoard = () => {
   const [elemental, setElemental] = useState<elemental>("" as elemental);
@@ -25,26 +26,25 @@ const FightBoard = () => {
     try {
       // Randomly select an elemental state
       const elementalStateOptions = ["fire", "ice", "nature", "lightning"];
-      const elementalState =
-        elementalStateOptions[
-          Math.floor(Math.random() * elementalStateOptions.length)
-        ];
+      const elementalState = elementalStateOptions[
+        Math.floor(Math.random() * elementalStateOptions.length)
+      ] as elemental;
 
-      setElemental(elementalState as elemental);
       // Fetch 2 random fighters and set them to state
       const { fighter1, fighter2 }: { fighter1: Fighter; fighter2: Fighter } =
         await fetchRandomFighters();
+      setElemental(elementalState);
       setLoading(false);
       setPlayer1(fighter1);
       setPlayer2(fighter2);
       setFightActive(true);
 
-      // fighting logic PUT request to the server and set the winner to state
-      const result = await fightLogic(fighter1, fighter2, elemental);
-
+      // fighting logic POST request to the server and set the winner to state
+      const result = await fightLogic({ fighter1, fighter2, elementalState });
+      console.log(result);
       // client side delay to simulate fight
       setTimeout(() => {
-        setWinner(result);
+        setWinner(result || ""); // Ensure that result is always a string
         setFightActive(false);
       }, 4000);
     } catch (error) {

@@ -1,13 +1,14 @@
 import { Fighter } from "@/lib/types";
 import FighterCard from "@/components/fighter-info-card";
 import { Vortex } from "@/components/ui/vortex";
-import { getAllFighters } from "@/services/services";
 import Link from "next/link";
+import { getAllFighters } from "@/services/actions";
 
 export interface FightersArray {
   fighters: Fighter[];
 }
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+
 const FighersPage = async () => {
   const allFighters = await getAllFighters();
 
@@ -22,7 +23,7 @@ const FighersPage = async () => {
 
       <div className="container mx-auto z-50 relative">
         <ul className="flex flex-wrap gap-6 w-full justify-evenly">
-          {allFighters.map((fighter: Fighter) => (
+          {(allFighters as Fighter[])?.map((fighter: Fighter) => (
             <li key={fighter.name} className="w-80 ">
               <Link href={`/single-fighter-page/${fighter.slug}`}>
                 <FighterCard fighter={fighter} />

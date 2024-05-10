@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import ShinyButton from "@/components/ui/shiny-button";
 import { SparklesHero } from "@/components/ui/sparkles-hero";
-import { Vortex } from "@/components/ui/vortex";
 import Link from "next/link";
 
 export default function Home() {

@@ -15,6 +15,9 @@ const CombatCard = ({ fighterData }: CombatCardProps) => {
           className="relative bg-white rounded-2xl sm:w-full  w-1/2 h-full flex-nowrap min-w-12  
         md:min-h-40"
         >
+          <div className="absolute -top-3 bg-[#E18900] text-black rounded-lg z-50 translate-x-1/2 right-1/2 px-2 pb-1 font-bold text-xl">
+            <span>{fighterData.name}</span>
+          </div>
           <div className="flex bottom-0 bg-slate-300  absolute -left-20 sm:left-0 top-0 sm:top-auto z-50 flex-col md:flex-row items-center rounded-lg sm:rounded-tr-lg sm:rounded-bl-lg p-1  gap-2">
             <Badge variant={"secondary"} className="py-1">
               Weakness
