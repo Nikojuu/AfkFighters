@@ -3,6 +3,7 @@ import FighterCard from "@/components/fighter-info-card";
 import { Vortex } from "@/components/ui/vortex";
 import Link from "next/link";
 import { getAllFighters } from "@/services/services";
+import { revalidatePath } from "next/cache";
 
 export interface FightersArray {
   fighters: Fighter[];
@@ -10,6 +11,7 @@ export interface FightersArray {
 export const dynamic = "force-dynamic";
 
 const FighersPage = async () => {
+  revalidatePath("/fighters");
   const allFighters = await getAllFighters();
 
   return (
