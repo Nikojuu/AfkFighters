@@ -18,6 +18,7 @@ export const fetchRandomFighters = async () => {
   }
 };
 
+<<<<<<< HEAD
 // export const fightLogic = async (
 //   fighter1: Fighter,
 //   fighter2: Fighter,
@@ -55,6 +56,8 @@ export const getAllFighters = async (): Promise<Fighter[]> => {
   }
 };
 
+=======
+>>>>>>> 613c74d41319761c2c622ac395d15a38a1142a16
 export const getFighter = async ({
   slug,
 }: {
@@ -142,4 +145,20 @@ LIMIT 1;
     biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
     mostWins: data[4] as Fighter, // Access the fifth element for mostWins
   };
+};
+
+export const uploadImage = async (formData: FormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/image-reshape`, {
+      method: "POST",
+
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

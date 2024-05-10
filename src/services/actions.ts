@@ -1,5 +1,5 @@
 "use server";
-import { Fighter, elemental } from "@/lib/types";
+import { Fighter, FighterSchema, elemental } from "@/lib/types";
 import { sql } from "@vercel/postgres";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -113,5 +113,77 @@ const updateStats = async (
   } catch (error) {
     console.log(error);
     throw new Error("An error occurred while updating statistics.");
+  }
+};
+
+export const createFighter = async (newFighter: unknown) => {
+  // Validate the new fighter data again on server side to prevent any client side manipulation
+  const result = FighterSchema.safeParse(newFighter);
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.errors.forEach((issue) => {
+      errorMessage = errorMessage + issue.path[0] + ": " + issue.message + ". ";
+    });
+
+    return {
+      error: errorMessage,
+    };
+  }
+  const {
+    name,
+    picture,
+    weakness,
+    attack,
+    defence,
+    hitpoints,
+    description,
+    lore,
+  } = result.data;
+
+  if (attack + defence + hitpoints > 500) {
+    return {
+      error: "Total stat points cannot exceed 500",
+    };
+  }
+
+  const slug = name
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "") // Remove non-word characters except spaces and hyphens
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-"); // Replace multiple hyphens with single hyphe
+
+  await sql`
+  INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence, lore)
+  VALUES (
+    ${name},
+    ${slug},
+    ${description},
+    ${attack},
+    ${hitpoints},
+    ${weakness},
+    ${picture},
+    0, -- Default value for WinStreak
+    0, -- Default value for TotalWins
+    ${defence},
+    ${lore}
+  )
+`;
+};
+
+export const getAllFighters = async () => {
+  try {
+    const query = sql`
+    SELECT * FROM fighters
+  `;
+
+    const res = await query;
+
+    const fighters = res.rows;
+
+    return fighters;
+  } catch (error) {
+    console.log(error);
   }
 };
