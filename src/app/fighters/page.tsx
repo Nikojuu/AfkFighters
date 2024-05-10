@@ -7,7 +7,7 @@ import Link from "next/link";
 export interface FightersArray {
   fighters: Fighter[];
 }
-export const revalidate = 3600;
+export const revalidate = 0;
 const FighersPage = async () => {
   const allFighters = await getAllFighters();
 
