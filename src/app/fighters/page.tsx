@@ -7,7 +7,8 @@ import Link from "next/link";
 export interface FightersArray {
   fighters: Fighter[];
 }
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 const FighersPage = async () => {
   const allFighters = await getAllFighters();
 
