@@ -40,23 +40,26 @@ export default function Navbar() {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
                 <span className="sr-only">Acme Inc</span>
               </Link>
-              <Link href="#" className="hover:text-foreground">
+              <Link
+                href="/dashboard"
+                className="text-muted-foreground hover:text-foreground"
+              >
                 Dashboard
               </Link>
               <Link
-                href="#"
+                href="/fight"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Fight
               </Link>
               <Link
-                href="#"
+                href="/fighters"
                 className="text-muted-foreground hover:text-foreground"
               >
                 All Fighters
