@@ -18,46 +18,6 @@ export const fetchRandomFighters = async () => {
   }
 };
 
-<<<<<<< HEAD
-// export const fightLogic = async (
-//   fighter1: Fighter,
-//   fighter2: Fighter,
-//   elemental: elemental
-// ) => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/api/fight-logic`, {
-//       method: "PUT",
-
-//       body: JSON.stringify({ fighter1, fighter2, elemental }),
-//     });
-
-//     const data = await response.json();
-
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-export const getAllFighters = async (): Promise<Fighter[]> => {
-  try {
-    const response = await fetch(`${BASE_URL}/api/all-fighters`);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch all fighters");
-    }
-
-    const data: Fighter[] = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error in getAllFighters:", error);
-    throw error;
-  }
-};
-
-=======
->>>>>>> 613c74d41319761c2c622ac395d15a38a1142a16
 export const getFighter = async ({
   slug,
 }: {
