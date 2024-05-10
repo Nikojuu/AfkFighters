@@ -3,7 +3,15 @@ import { Fighter, FighterSchema, elemental } from "@/lib/types";
 import { sql } from "@vercel/postgres";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const fightLogic = async ({ fighter1, fighter2, elemental }: any) => {
+export const fightLogic = async ({
+  fighter1,
+  fighter2,
+  elemental,
+}: {
+  fighter1: Fighter;
+  fighter2: Fighter;
+  elemental: elemental;
+}) => {
   try {
     // Function to calculate damage based on attacker's attack and defender's defense
     const calculateDamage = (attacker: Fighter, defender: Fighter) => {

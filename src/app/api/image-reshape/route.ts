@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     .resize(1024, 1024, {
       fit: "contain",
       background: { r: 255, g: 255, b: 255 },
-    }) // Example: Resize the image to 200x200
+    })
     .toBuffer();
 
   const fileNameWithoutExtension = (file as File).name.split(".")[0];
