@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 export const fetchRandomFighters = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/fighters`, {
+      method: "POST",
       cache: "no-store",
     });
     const data = await response.json();
@@ -14,45 +15,6 @@ export const fetchRandomFighters = async () => {
     return data;
   } catch (error) {
     console.log(error);
-  }
-};
-
-export const fightLogic = async (
-  fighter1: Fighter,
-  fighter2: Fighter,
-  elemental: elemental
-) => {
-  try {
-    const response = await fetch(`${BASE_URL}/api/fight-logic`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ fighter1, fighter2, elemental }),
-    });
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getAllFighters = async (): Promise<Fighter[]> => {
-  try {
-    const response = await fetch(`${BASE_URL}/api/all-fighters`);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch all fighters");
-    }
-
-    const data: Fighter[] = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error in getAllFighters:", error);
-    throw error;
   }
 };
 
@@ -143,4 +105,20 @@ LIMIT 1;
     biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
     mostWins: data[4] as Fighter, // Access the fifth element for mostWins
   };
+};
+
+export const uploadImage = async (formData: FormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/image-reshape`, {
+      method: "POST",
+
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

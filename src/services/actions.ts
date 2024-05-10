@@ -1,13 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+"use server";
+import { Fighter, FighterSchema, elemental } from "@/lib/types";
 import { sql } from "@vercel/postgres";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-import type { Fighter, elemental } from "@/lib/types";
-
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const fightLogic = async ({ fighter1, fighter2, elemental }: any) => {
   try {
-    const { fighter1, fighter2, elemental } = await req.json();
-
     // Function to calculate damage based on attacker's attack and defender's defense
     const calculateDamage = (attacker: Fighter, defender: Fighter) => {
       const minimumDamage = 10; // Minimum damage threshold
@@ -32,7 +29,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     };
 
     // Function to simulate a fight between two fighters
-    const initiateFight = (
+    const initiateFight = async (
       fighter1: Fighter,
       fighter2: Fighter,
       environment: elemental
@@ -40,7 +37,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       let attacker = fighter1;
       let opponent = fighter2;
 
-      while (fighter1.hitpoints > 0 && fighter2.hitpoints > 0) {
+      while (attacker.hitpoints > 0 && opponent.hitpoints > 0) {
         // Check if the current fighter is weak against the environment
         if (isWeakAgainstEnvironment(attacker, environment)) {
           // Apply penalty to attack
@@ -74,12 +71,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     };
 
     // return the result of the fight
-    const result = initiateFight(fighter1, fighter2, elemental);
+    const result = await initiateFight(fighter1, fighter2, elemental);
     //update the statistics in database
 
     updateStats(fighter1, fighter2, result);
 
-    return NextResponse.json(result);
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -116,5 +113,77 @@ const updateStats = async (
   } catch (error) {
     console.log(error);
     throw new Error("An error occurred while updating statistics.");
+  }
+};
+
+export const createFighter = async (newFighter: unknown) => {
+  // Validate the new fighter data again on server side to prevent any client side manipulation
+  const result = FighterSchema.safeParse(newFighter);
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.errors.forEach((issue) => {
+      errorMessage = errorMessage + issue.path[0] + ": " + issue.message + ". ";
+    });
+
+    return {
+      error: errorMessage,
+    };
+  }
+  const {
+    name,
+    picture,
+    weakness,
+    attack,
+    defence,
+    hitpoints,
+    description,
+    lore,
+  } = result.data;
+
+  if (attack + defence + hitpoints > 500) {
+    return {
+      error: "Total stat points cannot exceed 500",
+    };
+  }
+
+  const slug = name
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "") // Remove non-word characters except spaces and hyphens
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-"); // Replace multiple hyphens with single hyphe
+
+  await sql`
+  INSERT INTO Fighters (Name, Slug, Description, Attack, Hitpoints, Weakness, ImgSrc, WinStreak, TotalWins, Defence, lore)
+  VALUES (
+    ${name},
+    ${slug},
+    ${description},
+    ${attack},
+    ${hitpoints},
+    ${weakness},
+    ${picture},
+    0, -- Default value for WinStreak
+    0, -- Default value for TotalWins
+    ${defence},
+    ${lore}
+  )
+`;
+};
+
+export const getAllFighters = async () => {
+  try {
+    const query = sql`
+    SELECT * FROM fighters
+  `;
+
+    const res = await query;
+
+    const fighters = res.rows;
+
+    return fighters;
+  } catch (error) {
+    console.log(error);
   }
 };
