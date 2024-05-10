@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { audiowide, unkempt } from "./fonts/fonts";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "AFK Fighers",
@@ -36,6 +37,7 @@ export default function RootLayout({
             <Navbar />
 
             {children}
+            <Toaster />
           </ThemeProvider>
           <Footer />
         </body>

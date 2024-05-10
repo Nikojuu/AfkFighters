@@ -20,7 +20,10 @@ export const fetchRandomFighters = async () => {
 
 export const getAllFighters = async (): Promise<Fighter[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/api/all-fighters`);
+    const response = await fetch(`${BASE_URL}/api/all-fighters`, {
+      // Make this cached for longer periods of time if making real app
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error("Failed to fetch all fighters");
@@ -122,4 +125,20 @@ LIMIT 1;
     biggestWinStreak: data[3] as Fighter, // Access the fourth element for biggestWinStreak
     mostWins: data[4] as Fighter, // Access the fifth element for mostWins
   };
+};
+
+export const uploadImage = async (formData: FormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/image-reshape`, {
+      method: "POST",
+
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
