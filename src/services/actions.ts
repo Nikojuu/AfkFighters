@@ -171,3 +171,19 @@ export const createFighter = async (newFighter: unknown) => {
   )
 `;
 };
+
+export const getAllFighters = async () => {
+  try {
+    const query = sql`
+    SELECT * FROM fighters
+  `;
+
+    const res = await query;
+
+    const fighters = res.rows;
+
+    return fighters;
+  } catch (error) {
+    console.log(error);
+  }
+};

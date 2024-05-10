@@ -18,26 +18,6 @@ export const fetchRandomFighters = async () => {
   }
 };
 
-export const getAllFighters = async (): Promise<Fighter[]> => {
-  try {
-    const response = await fetch(`${BASE_URL}/api/all-fighters`, {
-      // Make this cached for longer periods of time if making real app
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch all fighters");
-    }
-
-    const data: Fighter[] = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error in getAllFighters:", error);
-    throw error;
-  }
-};
-
 export const getFighter = async ({
   slug,
 }: {
