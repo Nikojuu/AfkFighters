@@ -2,7 +2,7 @@ import { Fighter } from "@/lib/types";
 import FighterCard from "@/components/fighter-info-card";
 import { Vortex } from "@/components/ui/vortex";
 import Link from "next/link";
-import { getAllFighters } from "@/services/actions";
+import { getAllFighters } from "@/services/services";
 
 export interface FightersArray {
   fighters: Fighter[];

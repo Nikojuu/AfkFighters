@@ -1,6 +1,7 @@
 "use server";
 import { Fighter, FighterSchema, elemental } from "@/lib/types";
 import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fightLogic = async ({
@@ -178,20 +179,4 @@ export const createFighter = async (newFighter: unknown) => {
     ${lore}
   )
 `;
-};
-
-export const getAllFighters = async () => {
-  try {
-    const query = sql`
-    SELECT * FROM fighters
-  `;
-
-    const res = await query;
-
-    const fighters = res.rows;
-
-    return fighters;
-  } catch (error) {
-    console.log(error);
-  }
 };
